@@ -430,7 +430,16 @@ body.page-returning { animation: pageEnter 380ms ease both; }
     function normalizeText(text) {
         return text.replace(/\s+/g, ' ').trim();
     }
-    function translatePage(lang) {
+    var defaultLanguage = 'ru';
+    var languageStorageKey = 'mononyxx-language';
+    var languageChoiceStorageKey = 'mononyxx-language-choice';
+    function getInitialLanguage() {
+        return localStorage.getItem(languageChoiceStorageKey) === 'manual'
+            ? localStorage.getItem(languageStorageKey) || defaultLanguage
+            : defaultLanguage;
+    }
+    function translatePage(lang, options) {
+        var shouldPersistChoice = options && options.persistChoice === true;
         var toMap = lang === 'en' ? ruToEn : enToRu;
         var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
             acceptNode: function (node) {
@@ -450,17 +459,20 @@ body.page-returning { animation: pageEnter 380ms ease both; }
             }
         });
         document.documentElement.lang = lang;
-        localStorage.setItem('mononyxx-language', lang);
+        localStorage.setItem(languageStorageKey, lang);
+        if (shouldPersistChoice) {
+            localStorage.setItem(languageChoiceStorageKey, 'manual');
+        }
         document.querySelectorAll('[data-lang-control]').forEach(function (button) {
             button.setAttribute('aria-pressed', String(button.getAttribute('data-lang-control') === lang));
         });
     }
     document.querySelectorAll('[data-lang-control]').forEach(function (button) {
         button.addEventListener('click', function () {
-            translatePage(button.getAttribute('data-lang-control') || 'ru');
+            translatePage(button.getAttribute('data-lang-control') || defaultLanguage, { persistChoice: true });
         });
     });
-    translatePage(localStorage.getItem('mononyxx-language') || 'ru');
+    translatePage(getInitialLanguage());
 
     // Mobile menu
     var menuBtn = document.getElementById('mobile-menu-button');

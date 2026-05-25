@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en"><head>
+<html lang="ru"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <script>
@@ -356,8 +356,8 @@ if (window.__mononyxxInitialHash) {
 </div>
 <div class="hidden md:flex items-center gap-4">
 <div aria-label="Language switcher" class="language-switch flex items-center border border-surface-variant rounded overflow-hidden" role="group">
-<button aria-pressed="true" class="px-3 py-2 font-label-caps text-label-caps text-primary transition-colors" data-lang-control="en" type="button">EN</button>
-<button aria-pressed="false" class="px-3 py-2 font-label-caps text-label-caps text-primary transition-colors" data-lang-control="ru" type="button">RU</button>
+<button aria-pressed="false" class="px-3 py-2 font-label-caps text-label-caps text-primary transition-colors" data-lang-control="en" type="button">EN</button>
+<button aria-pressed="true" class="px-3 py-2 font-label-caps text-label-caps text-primary transition-colors" data-lang-control="ru" type="button">RU</button>
 </div>
 <a class="inline-flex px-6 py-3 bg-primary text-on-primary font-label-caps text-label-caps rounded items-center justify-center hover:bg-tertiary-container transition-colors duration-300" href="#contact">
                 Start a Project
@@ -376,8 +376,8 @@ if (window.__mononyxxInitialHash) {
 <a class="text-on-surface-variant font-label-caps text-label-caps hover:text-primary transition-colors duration-300" href="#process">PROCESS</a>
 <a class="inline-flex px-5 py-3 bg-primary text-on-primary font-label-caps text-label-caps rounded items-center justify-center hover:bg-tertiary-container transition-colors duration-300" href="#contact">Start a Project</a>
 <div aria-label="Language switcher" class="language-switch flex items-center border border-surface-variant rounded overflow-hidden self-start" role="group">
-<button aria-pressed="true" class="px-4 py-3 font-label-caps text-label-caps text-primary transition-colors" data-lang-control="en" type="button">EN</button>
-<button aria-pressed="false" class="px-4 py-3 font-label-caps text-label-caps text-primary transition-colors" data-lang-control="ru" type="button">RU</button>
+<button aria-pressed="false" class="px-4 py-3 font-label-caps text-label-caps text-primary transition-colors" data-lang-control="en" type="button">EN</button>
+<button aria-pressed="true" class="px-4 py-3 font-label-caps text-label-caps text-primary transition-colors" data-lang-control="ru" type="button">RU</button>
 </div>
 </div>
 </div>
@@ -1085,12 +1085,23 @@ Pricing &amp; FAQ <span class="material-symbols-outlined text-sm">arrow_forward<
         { en: '© 2026 MONONYXX. ALL RIGHTS RESERVED.', ru: '© 2026 MONONYXX. ВСЕ ПРАВА ЗАЩИЩЕНЫ.' },
     ];
 
+    const defaultLanguage = 'ru';
+    const languageStorageKey = 'mononyxx-language';
+    const languageChoiceStorageKey = 'mononyxx-language-choice';
+    const getInitialLanguage = () => (
+        localStorage.getItem(languageChoiceStorageKey) === 'manual'
+            ? localStorage.getItem(languageStorageKey) || defaultLanguage
+            : defaultLanguage
+    );
+    const getCurrentLanguage = () => localStorage.getItem(languageStorageKey) || defaultLanguage;
+
     const translateText = (text, language) => {
         const entry = translationEntries.find((item) => item.en === text || item.ru === text);
         return entry ? entry[language] : text;
     };
 
-    const applyLanguage = (language) => {
+    const applyLanguage = (language, options = {}) => {
+        const shouldPersistChoice = options.persistChoice === true;
         const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
             acceptNode: (node) => {
                 const parentTag = node.parentElement?.tagName;
@@ -1131,7 +1142,10 @@ Pricing &amp; FAQ <span class="material-symbols-outlined text-sm">arrow_forward<
 
         document.documentElement.lang = language;
         document.title = 'mononyxx';
-        localStorage.setItem('mononyxx-language', language);
+        localStorage.setItem(languageStorageKey, language);
+        if (shouldPersistChoice) {
+            localStorage.setItem(languageChoiceStorageKey, 'manual');
+        }
 
         document.querySelectorAll('[data-lang-control]').forEach((button) => {
             const isActive = button.dataset.langControl === language;
@@ -1281,7 +1295,7 @@ Pricing &amp; FAQ <span class="material-symbols-outlined text-sm">arrow_forward<
             return;
         }
 
-        const language = localStorage.getItem('mononyxx-language') || 'en';
+        const language = getCurrentLanguage();
         const meta = contactMethodMeta[contactMethod];
         const isVisible = Boolean(meta);
 
@@ -1371,11 +1385,11 @@ Pricing &amp; FAQ <span class="material-symbols-outlined text-sm">arrow_forward<
 
     document.querySelectorAll('[data-lang-control]').forEach((button) => {
         button.addEventListener('click', () => {
-            applyLanguage(button.dataset.langControl);
+            applyLanguage(button.dataset.langControl, { persistChoice: true });
         });
     });
 
-    applyLanguage(localStorage.getItem('mononyxx-language') || 'en');
+    applyLanguage(getInitialLanguage());
 
     const initialHash = window.__mononyxxInitialHash;
     if (initialHash) {
@@ -1392,8 +1406,6 @@ Pricing &amp; FAQ <span class="material-symbols-outlined text-sm">arrow_forward<
     const leadForm = document.getElementById('lead-form');
     const leadSubmit = document.getElementById('lead-submit');
     const leadFormMessage = document.getElementById('lead-form-message');
-
-    const getCurrentLanguage = () => localStorage.getItem('mononyxx-language') || 'en';
 
     const setLeadMessage = (messageKey, type) => {
         if (!leadFormMessage) {
