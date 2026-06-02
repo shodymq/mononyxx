@@ -5,6 +5,10 @@
     { "source": "/cases/starkids", "destination": "/cases/starkids.html" },
     { "source": "/demo/starkids", "destination": "/demo/starkids.html" },
     { "source": "/pricing", "destination": "/pricing.html" },
-    { "source": "/quiz", "destination": "/quiz.html" }
+    { "source": "/quiz", "destination": "/quiz.html" },
+    { "source": "/landing-page", "destination": "/landing-page.html" },
+    { "source": "/business-website", "destination": "/business-website.html" },
+    { "source": "/mobile-app", "destination": "/mobile-app.html" },
+    { "source": "/automation", "destination": "/automation.html" }
   ]
 }

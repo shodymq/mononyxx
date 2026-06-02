@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Лендинг на заказ в Казахстане — MONONYXX</title>
+<meta name="description" content="Создаем лендинги для бизнеса: дизайн, адаптация под телефон, WhatsApp-заявки, услуги, цены и отзывы. Работаем по Казахстану и СНГ."/>
+<meta property="og:title" content="Лендинг на заказ в Казахстане — MONONYXX"/>
+<meta property="og:description" content="Создаем лендинги для бизнеса: дизайн, адаптация под телефон, WhatsApp-заявки, услуги, цены и отзывы."/>
+<meta property="og:image" content="/og-image.png"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+tailwind.config = {
+    darkMode: "class",
+    theme: {
+        extend: {
+            "colors": {
+                "tertiary": "#000000","tertiary-container": "#1b1c1c","surface-container": "#efeeeb","inverse-primary": "#c6c6c6","outline-variant": "#cfc4c5","surface-variant": "#e3e2e0","inverse-on-surface": "#f2f1ee","on-error": "#ffffff","surface-container-lowest": "#ffffff","primary": "#000000","on-primary": "#ffffff","surface": "#faf9f6","primary-fixed": "#e2e2e2","inverse-surface": "#2f312f","background": "#faf9f6","on-surface-variant": "#4c4546","error-container": "#ffdad6","surface-container-highest": "#e3e2e0","on-background": "#1a1c1a","error": "#ba1a1a","surface-container-high": "#e9e8e5","on-secondary": "#ffffff","surface-container-low": "#f4f3f1","on-surface": "#1a1c1a","primary-fixed-dim": "#c6c6c6","outline": "#7e7576","surface-dim": "#dbdad7","surface-bright": "#faf9f6","primary-container": "#1b1b1b","on-tertiary": "#ffffff"
+            },
+            "borderRadius": { "DEFAULT": "0.125rem","lg": "0.25rem","xl": "0.5rem","full": "0.75rem" },
+            "spacing": { "unit": "8px","margin-desktop": "64px","container-max-width": "1280px","section-padding": "120px","gutter": "24px","margin-mobile": "20px" },
+            "fontFamily": { "h2": ["Bodoni Moda"],"h1": ["Bodoni Moda"],"body-md": ["Hanken Grotesk"],"body-lg": ["Hanken Grotesk"],"label-caps": ["Hanken Grotesk"],"display": ["Bodoni Moda"],"h3": ["Hanken Grotesk"] },
+            "fontSize": {
+                "h2": ["32px", { "lineHeight": "1.3","letterSpacing": "0em","fontWeight": "500" }],
+                "h1": ["48px", { "lineHeight": "1.2","letterSpacing": "-0.01em","fontWeight": "500" }],
+                "body-md": ["16px", { "lineHeight": "1.6","letterSpacing": "0.01em","fontWeight": "400" }],
+                "body-lg": ["18px", { "lineHeight": "1.8","letterSpacing": "0.01em","fontWeight": "400" }],
+                "label-caps": ["12px", { "lineHeight": "1.2","letterSpacing": "0.15em","fontWeight": "700" }],
+                "display": ["72px", { "lineHeight": "1.1","letterSpacing": "-0.02em","fontWeight": "600" }],
+                "h3": ["24px", { "lineHeight": "1.4","letterSpacing": "0.02em","fontWeight": "600" }]
+            }
+        }
+    }
+}
+</script>
+<style>
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+html, body { overflow-x: hidden; max-width: 100%; }
+body { animation: pageEnter 420ms ease both; }
+body.page-leaving { animation: pageLeave 220ms ease both; pointer-events:none; }
+@keyframes pageEnter { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+@keyframes pageLeave { from { opacity:1; transform:translateY(0); } to { opacity:0; transform:translateY(-10px); } }
+.mobile-menu-panel { display:grid; grid-template-rows:0fr; opacity:0; transform:translateY(-10px); pointer-events:none; transition:grid-template-rows 320ms ease, opacity 240ms ease, transform 320ms ease; }
+.mobile-menu-panel > div { overflow:hidden; }
+.mobile-menu-panel.menu-open { grid-template-rows:1fr; opacity:1; transform:translateY(0); pointer-events:auto; }
+</style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased selection:bg-primary selection:text-on-primary">
+
+<!-- HEADER -->
+<header class="sticky top-0 z-50 w-full bg-background/90 backdrop-blur-md border-b border-surface-variant/30">
+    <nav class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-5 max-w-container-max-width mx-auto">
+        <a class="flex items-center gap-2 hover:opacity-80 transition-opacity" href="/">
+            <img alt="MONONYXX" class="h-8 w-auto" src="/mononyxx-logo.png"/>
+            <span class="sr-only">MONONYXX</span>
+        </a>
+        <div class="hidden md:flex items-center gap-10">
+            <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="/">ГЛАВНАЯ</a>
+            <a class="font-label-caps text-label-caps text-primary" href="/#services">УСЛУГИ</a>
+            <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="/pricing">ЦЕНЫ</a>
+            <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="/cases">КЕЙСЫ</a>
+            <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="/#contact">КОНТАКТЫ</a>
+        </div>
+        <a id="nav-wa-cta" href="#" target="_blank" rel="noopener"
+           class="hidden md:inline-flex px-6 py-3 bg-primary text-on-primary font-label-caps text-label-caps rounded items-center justify-center hover:bg-tertiary-container transition-colors duration-300">
+            Написать в WhatsApp
+        </a>
+        <button aria-controls="mobile-menu" aria-expanded="false" aria-label="Открыть меню"
+                class="md:hidden text-primary" id="mobile-menu-button" type="button">
+            <span class="material-symbols-outlined text-2xl" id="mobile-menu-icon">menu</span>
+        </button>
+    </nav>
+    <div class="mobile-menu-panel md:hidden border-t border-surface-variant/40 bg-background/95 px-margin-mobile pb-8 pt-2" id="mobile-menu">
+        <div class="flex flex-col gap-5">
+            <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="/">ГЛАВНАЯ</a>
+            <a class="font-label-caps text-label-caps text-primary" href="/#services">УСЛУГИ</a>
+            <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="/pricing">ЦЕНЫ</a>
+            <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="/cases">КЕЙСЫ</a>
+            <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="/#contact">КОНТАКТЫ</a>
+            <a id="mobile-nav-wa-cta" href="#" target="_blank" rel="noopener"
+               class="inline-flex px-5 py-3 bg-primary text-on-primary font-label-caps text-label-caps rounded items-center justify-center hover:bg-tertiary-container transition-colors duration-300">
+                Написать в WhatsApp
+            </a>
+        </div>
+    </div>
+</header>
+
+<main class="pb-28 md:pb-0">
+
+    <!-- Hero -->
+    <section class="w-full px-margin-mobile md:px-margin-desktop pt-16 pb-12 max-w-container-max-width mx-auto">
+        <span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest mb-4 block">Услуги</span>
+        <h1 class="font-h1 text-h1 md:text-display text-primary mb-6 max-w-3xl">Лендинг для бизнеса под ключ в Казахстане</h1>
+        <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Делаем посадочные страницы, которые показывают услуги, цены, отзывы и ведут клиента в WhatsApp.</p>
+    </section>
+
+    <!-- Pricing -->
+    <section class="w-full bg-surface-container-low py-section-padding border-t border-surface-variant/30">
+        <div class="px-margin-mobile md:px-margin-desktop max-w-container-max-width mx-auto">
+            <div class="mb-12">
+                <span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest mb-4 block">Тарифы</span>
+                <h2 class="font-h1 text-h1 text-primary">Выберите пакет</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Старт -->
+                <div class="relative flex flex-col bg-surface-container-lowest border-2 border-primary rounded-lg p-6 shadow-[4px_4px_0_0_#000] transition-all duration-300 hover:-translate-y-1 hover:shadow-[7px_7px_0_0_#000]">
+                    <div class="font-label-caps text-label-caps text-on-surface-variant mb-2">СТАРТ</div>
+                    <div class="font-h2 text-[36px] text-primary leading-tight mb-1">19&nbsp;990&nbsp;₸</div>
+                    <p class="font-body-md text-sm text-on-surface-variant mb-6">Простая страница, чтобы у бизнеса была аккуратная ссылка.</p>
+                    <div class="flex-grow">
+                        <div class="font-label-caps text-label-caps text-primary mb-3">Включено:</div>
+                        <ul class="space-y-2 mb-5">
+                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm text-primary mt-0.5">check</span><span class="font-body-md text-sm text-primary">2–3 блока</span></li>
+                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm text-primary mt-0.5">check</span><span class="font-body-md text-sm text-primary">Услуги и контакты</span></li>
+                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm text-primary mt-0.5">check</span><span class="font-body-md text-sm text-primary">Простая кнопка WhatsApp</span></li>
+                        </ul>
+                        <div class="font-label-caps text-label-caps text-on-surface-variant mb-3">Не включено:</div>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm text-on-surface-variant mt-0.5">close</span><span class="font-body-md text-sm text-on-surface-variant">Отзывы и кейсы</span></li>
+                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm text-on-surface-variant mt-0.5">close</span><span class="font-body-md text-sm text-on-surface-variant">Домен / поддомен</span></li>
+                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm text-on-surface-variant mt-0.5">close</span><span class="font-body-md text-sm text-on-surface-variant">Цены на сайте</span></li>
+                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm text-on-surface-variant mt-0.5">close</span><span class="font-body-md text-sm text-on-surface-variant">Аналитика</span></li>
+                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm text-on-surface-variant mt-0.5">close</span><span class="font-body-md text-sm text-on-surface-variant">Поддержка</span></li>
+                        </ul>
+                    </div>
+                    <a class="landing-wa-btn mt-auto w-full inline-flex items-center justify-center px-5 py-3 border-2 border-primary text-primary font-label-caps text-label-caps rounded hover:bg-primary hover:text-on-primary transition-colors"
+                       href="#" target="_blank" rel="noopener"
+                       data-wa-text="Здравствуйте! Хочу заказать лендинг — тариф Старт (19 990 ₸). Можно подробнее?">
+                        Выбрать лендинг
+                    </a>
+                </div>
+
+                <!-- Бизнес -->
+                <div class="relative flex flex-col bg-surface-container-lowest border-2 border-primary rounded-lg p-6 shadow-[4px_4px_0_0_#000] transition-all duration-300 hover:-translate-y-1 hover:shadow-[7px_7px_0_0_#000]">
+                    <div class="absolute -top-3 right-5 bg-primary text-on-primary font-label-caps text-label-caps px-3 py-1 rounded">Оптимальный выбор</div>
+                    <div class="font-label-caps text-label-caps text-on-surface-variant mb-2">БИЗНЕС</div>
+                    <div class="font-h2 text-[36px] text-primary leading-tight mb-1">29&nbsp;990&nbsp;₸</div>
+                    <p class="font-body-md text-sm text-on-surface-variant mb-6">Полноценный лендинг для заявок и роста вашего бизнеса.</p>
+                    <div class="flex-grow">
+                        <div class="font-label-caps text-label-caps text-primary mb-3">Включено:</div>
+                        <ul class="space-y-2 mb-5">
+                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm text-primary mt-0.5">check</span><span class="font-body-md text-sm text-primary">5–6 блоков</span></li>
+                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm text-primary mt-0.5">check</span><span class="font-body-md text-sm text-primary">Услуги и цены</span></li>
+                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm text-primary mt-0.5">check</span><span class="font-body-md text-sm text-primary">Отзывы и кейсы</span></li>
+                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm text-primary mt-0.5">check</span><span class="font-body-md text-sm text-primary">Кнопка WhatsApp с готовым текстом</span></li>
+                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm text-primary mt-0.5">check</span><span class="font-body-md text-sm text-primary">Домен / поддомен</span></li>
+                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm text-primary mt-0.5">check</span><span class="font-body-md text-sm text-primary">Адаптация под заявку</span></li>
+                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm text-primary mt-0.5">check</span><span class="font-body-md text-sm text-primary">Базовая аналитика</span></li>
+                        </ul>
+                        <div class="font-label-caps text-label-caps text-on-surface-variant mb-3">Не включено:</div>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm text-on-surface-variant mt-0.5">close</span><span class="font-body-md text-sm text-on-surface-variant">WhatsApp-сценарий</span></li>
+                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm text-on-surface-variant mt-0.5">close</span><span class="font-body-md text-sm text-on-surface-variant">Поддержка 7 дней</span></li>
+                        </ul>
+                    </div>
+                    <a class="landing-wa-btn mt-auto w-full inline-flex items-center justify-center px-5 py-3 bg-primary text-on-primary font-label-caps text-label-caps rounded hover:bg-tertiary-container transition-colors"
+                       href="#" target="_blank" rel="noopener"
+                       data-wa-text="Здравствуйте! Хочу заказать лендинг — тариф Бизнес (29 990 ₸). Можно подробнее?">
+                        Выбрать лендинг
+                    </a>
+                </div>
+
+                <!-- Бизнес+ -->
+                <div class="relative flex flex-col bg-primary text-on-primary border-2 border-primary rounded-lg p-6 shadow-[4px_4px_0_0_#cfc4c5] transition-all duration-300 hover:-translate-y-1 hover:shadow-[7px_7px_0_0_#cfc4c5]">
+                    <div class="font-label-caps text-label-caps text-on-primary/70 mb-2">БИЗНЕС+</div>
+                    <div class="font-h2 text-[36px] leading-tight mb-1">34&nbsp;990&nbsp;₸</div>
+                    <p class="font-body-md text-sm text-on-primary/80 mb-6">Лендинг + система для заявок и автоматизации общения с клиентами.</p>
+                    <div class="flex-grow">
+                        <div class="font-label-caps text-label-caps text-on-primary/70 mb-3">Включено:</div>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm mt-0.5">check</span><span class="font-body-md text-sm">6–8 блоков</span></li>
+                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm mt-0.5">check</span><span class="font-body-md text-sm">Услуги, цены, отзывы</span></li>
+                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm mt-0.5">check</span><span class="font-body-md text-sm">Мини-каталог товаров или услуг</span></li>
+                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm mt-0.5">check</span><span class="font-body-md text-sm">Кнопка WhatsApp с готовым текстом</span></li>
+                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm mt-0.5">check</span><span class="font-body-md text-sm">WhatsApp-сценарий автоответов</span></li>
+                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm mt-0.5">check</span><span class="font-body-md text-sm">Аналитика заявок, кликов</span></li>
+                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm mt-0.5">check</span><span class="font-body-md text-sm">3 сторис-макета для запуска</span></li>
+                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm mt-0.5">check</span><span class="font-body-md text-sm">Поддержка 7 дней</span></li>
+                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm mt-0.5">check</span><span class="font-body-md text-sm">Домен / поддомен</span></li>
+                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm mt-0.5">check</span><span class="font-body-md text-sm">Адаптация под заявку</span></li>
+                        </ul>
+                    </div>
+                    <a class="landing-wa-btn mt-auto w-full inline-flex items-center justify-center px-5 py-3 bg-on-primary text-primary font-label-caps text-label-caps rounded hover:bg-surface-container transition-colors"
+                       href="#" target="_blank" rel="noopener"
+                       data-wa-text="Здравствуйте! Хочу заказать лендинг — тариф Бизнес+ (34 990 ₸). Можно подробнее?">
+                        Выбрать лендинг
+                    </a>
+                </div>
+            </div>
+
+            <!-- Prepayment notice -->
+            <div class="mt-8 flex items-start gap-4 border border-primary/20 bg-surface-container-lowest rounded-lg px-6 py-5">
+                <span class="material-symbols-outlined text-primary text-[24px] mt-0.5 shrink-0">payments</span>
+                <div>
+                    <div class="font-label-caps text-label-caps text-primary mb-1">50% предоплата</div>
+                    <p class="font-body-md text-sm text-on-surface-variant">Стартуем после предоплаты 50%, остаток оплачивается после готового согласованного результата.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="w-full bg-background py-section-padding border-t border-surface-variant/30">
+        <div class="px-margin-mobile md:px-margin-desktop max-w-container-max-width mx-auto">
+            <div class="bg-primary text-on-primary rounded-lg p-8 md:p-12 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                <div>
+                    <h2 class="font-h2 text-h2 mb-3">Не уверены, какой тариф выбрать?</h2>
+                    <p class="font-body-md text-body-md text-on-primary/80">Напишите нам, опишите задачу — предложим подходящий вариант и ответим на вопросы.</p>
+                </div>
+                <a id="bottom-wa-cta" href="#" target="_blank" rel="noopener"
+                   class="inline-flex items-center justify-center px-6 py-4 bg-on-primary text-primary font-label-caps text-label-caps rounded hover:bg-surface-container transition-colors shrink-0">
+                    Обсудить лендинг
+                </a>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="w-full bg-surface-container-low text-primary border-t border-surface-variant/30">
+    <div class="px-margin-mobile md:px-margin-desktop max-w-container-max-width mx-auto py-12 md:py-16">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+            <a href="/" class="hover:opacity-80 transition-opacity">
+                <img alt="MONONYXX" class="h-8 w-auto" src="/mononyxx-logo.png"/>
+            </a>
+            <nav class="flex flex-wrap gap-x-8 gap-y-3">
+                <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="/">Главная</a>
+                <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="/landing-page">Лендинги</a>
+                <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="/business-website">Сайты</a>
+                <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="/mobile-app">Приложения</a>
+                <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="/automation">Автоматизация</a>
+                <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="/pricing">Цены</a>
+            </nav>
+            <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors"
+               href="https://www.instagram.com/mononyxx/" target="_blank" rel="noopener">Instagram</a>
+        </div>
+        <div class="mt-10 pt-8 border-t border-surface-variant/40 flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
+            <p class="font-label-caps text-label-caps text-on-surface-variant">© 2026 MONONYXX. Все права защищены.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- Sticky WA -->
+<a id="sticky-wa-mobile" href="#" target="_blank" rel="noopener"
+   class="md:hidden fixed bottom-6 z-50 inline-flex items-center justify-center gap-3 py-4 bg-primary text-on-primary font-label-caps text-label-caps rounded-full shadow-lg hover:bg-tertiary-container transition-colors"
+   style="left:50%;transform:translateX(-50%);width:calc(100% - 40px);">
+    <span class="material-symbols-outlined text-base">chat</span>
+    Написать в WhatsApp
+</a>
+<a id="sticky-wa-desktop" href="#" target="_blank" rel="noopener"
+   class="hidden md:flex fixed bottom-8 right-8 z-50 w-14 h-14 bg-primary text-on-primary rounded-full items-center justify-center shadow-lg hover:bg-tertiary-container transition-colors">
+    <span class="material-symbols-outlined">chat</span>
+    <span class="sr-only">Написать в WhatsApp</span>
+</a>
+
+<script src="/js/contacts.js"></script>
+<script>
+(function () {
+    var WA_DISCUSS = 'Здравствуйте! Хочу обсудить лендинг для бизнеса. Можно подробнее о тарифах?';
+    function setWaHref(el, text) { if (el) el.href = buildWhatsAppLink(text); }
+    ['nav-wa-cta','mobile-nav-wa-cta','sticky-wa-mobile','sticky-wa-desktop','bottom-wa-cta'].forEach(function(id) {
+        setWaHref(document.getElementById(id), WA_DISCUSS);
+    });
+    document.querySelectorAll('.landing-wa-btn').forEach(function(btn) {
+        var text = btn.getAttribute('data-wa-text');
+        if (text) btn.href = buildWhatsAppLink(text);
+    });
+
+    var menuBtn = document.getElementById('mobile-menu-button');
+    var menuPanel = document.getElementById('mobile-menu');
+    var menuIcon = document.getElementById('mobile-menu-icon');
+    function setMenuOpen(isOpen) {
+        menuPanel.classList.toggle('menu-open', isOpen);
+        menuBtn.setAttribute('aria-expanded', String(isOpen));
+        menuIcon.textContent = isOpen ? 'close' : 'menu';
+    }
+    if (menuBtn && menuPanel) {
+        menuBtn.addEventListener('click', function () { setMenuOpen(menuBtn.getAttribute('aria-expanded') !== 'true'); });
+        document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenuOpen(false); });
+        document.addEventListener('click', function (e) { if (!menuPanel.contains(e.target) && !menuBtn.contains(e.target)) setMenuOpen(false); });
+    }
+
+    document.addEventListener('click', function(e) {
+        var anchor = e.target.closest('a');
+        if (!anchor || anchor.target === '_blank' || anchor.hasAttribute('download')) return;
+        var href = anchor.getAttribute('href') || '';
+        if (!href || href.startsWith('#') || href.startsWith('https://')) return;
+        try {
+            var url = new URL(anchor.href, window.location.href);
+            if (url.origin !== window.location.origin) return;
+            e.preventDefault();
+            document.body.classList.add('page-leaving');
+            window.setTimeout(function() { window.location.href = anchor.href; }, 210);
+        } catch(err) {}
+    });
+})();
+</script>
+</body>
+</html>

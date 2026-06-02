@@ -9,8 +9,11 @@ if (window.__mononyxxInitialHash) {
     history.replaceState(null, '', window.location.pathname + window.location.search);
 }
 </script>
-<title>MONONYXX — Star Kids Redesign</title>
-<meta name="description" content="Star Kids — редизайн Flutter-приложения детского игрового центра: новая дизайн-система, 9 экранов, микро-анимации, light/dark тема, Flutter handoff. Кейс MONONYXX."/>
+<title>MONONYXX — разработка сайтов, приложений и AI-автоматизация в Казахстане</title>
+<meta name="description" content="Разработка сайтов, лендингов, мобильных приложений, MVP, WhatsApp-ботов и AI-автоматизации для бизнеса в Казахстане и СНГ."/>
+<meta property="og:title" content="MONONYXX — разработка сайтов, приложений и AI-автоматизация в Казахстане"/>
+<meta property="og:description" content="Разработка сайтов, лендингов, мобильных приложений, MVP, WhatsApp-ботов и AI-автоматизации для бизнеса в Казахстане и СНГ."/>
+<meta property="og:image" content="/og-image.png"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&amp;family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -348,11 +351,11 @@ if (window.__mononyxxInitialHash) {
 <span class="sr-only">MONONYXX</span>
 </a>
 <div class="hidden md:flex items-center gap-12">
-<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-primary transition-colors duration-300" href="#services">SERVICES</a>
-<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-primary transition-colors duration-300" href="#portfolio">PORTFOLIO</a>
-<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-primary transition-colors duration-300" href="#pricing">PRICING</a>
-<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-primary transition-colors duration-300" href="#reviews">REVIEWS</a>
-<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-primary transition-colors duration-300" href="#process">PROCESS</a>
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-primary transition-colors duration-300" href="#services">УСЛУГИ</a>
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-primary transition-colors duration-300" href="/pricing">ЦЕНЫ</a>
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-primary transition-colors duration-300" href="/cases">КЕЙСЫ</a>
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-primary transition-colors duration-300" href="/quiz">РАССЧИТАТЬ</a>
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-primary transition-colors duration-300" href="#contact">КОНТАКТЫ</a>
 </div>
 <div class="hidden md:flex items-center gap-4">
 <div aria-label="Language switcher" class="language-switch flex items-center border border-surface-variant rounded overflow-hidden" role="group">
@@ -369,12 +372,12 @@ if (window.__mononyxxInitialHash) {
 </nav>
 <div class="mobile-menu-panel md:hidden border-t border-surface-variant/40 bg-background/95 px-margin-mobile pb-8 pt-2" id="mobile-menu">
 <div class="flex flex-col gap-5">
-<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-primary transition-colors duration-300" href="#services">SERVICES</a>
-<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-primary transition-colors duration-300" href="#portfolio">PORTFOLIO</a>
-<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-primary transition-colors duration-300" href="#pricing">PRICING</a>
-<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-primary transition-colors duration-300" href="#reviews">REVIEWS</a>
-<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-primary transition-colors duration-300" href="#process">PROCESS</a>
-<a class="inline-flex px-5 py-3 bg-primary text-on-primary font-label-caps text-label-caps rounded items-center justify-center hover:bg-tertiary-container transition-colors duration-300" href="#contact">Start a Project</a>
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-primary transition-colors duration-300" href="#services">УСЛУГИ</a>
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-primary transition-colors duration-300" href="/pricing">ЦЕНЫ</a>
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-primary transition-colors duration-300" href="/cases">КЕЙСЫ</a>
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-primary transition-colors duration-300" href="/quiz">РАССЧИТАТЬ</a>
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-primary transition-colors duration-300" href="#contact">КОНТАКТЫ</a>
+<a class="inline-flex px-5 py-3 bg-primary text-on-primary font-label-caps text-label-caps rounded items-center justify-center hover:bg-tertiary-container transition-colors duration-300" id="mobile-hero-wa-btn" href="#">Написать в WhatsApp</a>
 <div aria-label="Language switcher" class="language-switch flex items-center border border-surface-variant rounded overflow-hidden self-start" role="group">
 <button aria-pressed="false" class="px-4 py-3 font-label-caps text-label-caps text-primary transition-colors" data-lang-control="en" type="button">EN</button>
 <button aria-pressed="true" class="px-4 py-3 font-label-caps text-label-caps text-primary transition-colors" data-lang-control="ru" type="button">RU</button>
@@ -386,11 +389,12 @@ if (window.__mononyxxInitialHash) {
 <!-- Hero Section -->
 <section class="stack-hero relative w-full px-margin-mobile md:px-margin-desktop py-16 md:py-20 max-w-container-max-width mx-auto flex flex-col md:flex-row items-center justify-between gap-10 overflow-hidden">
 <div class="w-full md:w-1/2 z-10 text-center md:text-left">
-<h1 class="font-display text-h1 md:text-display text-primary max-w-3xl mb-6 leading-tight">Build your idea</h1>
-<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mb-10">MONONYXX builds premium websites, web applications, mobile products, and AI automation for ambitious brands.</p>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest mb-4 block">Казахстан · Алматы · Астана</span>
+<h1 class="font-h1 text-h1 md:text-display text-primary max-w-3xl mb-6 leading-tight">Разработка сайтов, лендингов, мобильных приложений и AI-автоматизации для бизнеса в Казахстане</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mb-10">MONONYXX создает digital-продукты под ключ: от быстрых лендингов и корпоративных сайтов до MVP, мобильных приложений, CRM, WhatsApp-ботов и AI-интеграций.</p>
 <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-<a class="px-8 py-4 bg-primary text-on-primary font-label-caps text-label-caps rounded items-center justify-center hover:bg-tertiary-container transition-colors duration-300" href="#services">Get Started</a>
-<a class="px-8 py-4 bg-transparent text-primary border border-primary/20 font-label-caps text-label-caps rounded items-center justify-center hover:border-primary transition-colors duration-300" href="#reviews">Reviews</a>
+<a class="px-8 py-4 bg-primary text-on-primary font-label-caps text-label-caps rounded inline-flex items-center justify-center hover:bg-tertiary-container transition-colors duration-300" href="/pricing">Посмотреть цены</a>
+<a class="px-8 py-4 bg-transparent text-primary border border-primary/20 font-label-caps text-label-caps rounded inline-flex items-center justify-center hover:border-primary transition-colors duration-300" id="hero-wa-btn" href="#">Обсудить проект в WhatsApp</a>
 </div>
 </div>
 <div class="relative w-full md:w-1/2 h-[24rem] md:h-[34rem] flex items-center justify-start overflow-hidden">
@@ -425,58 +429,46 @@ if (window.__mononyxxInitialHash) {
 <section class="w-full bg-surface-container-low py-section-padding" id="services">
 <div class="px-margin-mobile md:px-margin-desktop max-w-container-max-width mx-auto">
 <div class="mb-16">
-<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest mb-4 block">Expertise</span>
-<h2 class="font-h1 text-h1 text-primary">Capabilities</h2>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest mb-4 block">Услуги</span>
+<h2 class="font-h1 text-h1 text-primary">Что мы делаем</h2>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 <!-- Service Card 1 -->
-<div class="p-10 bg-surface-container-lowest border border-surface-variant/50 rounded-lg hover:border-primary/20 transition-all duration-500 group">
-<div class="mb-8 text-primary opacity-70 group-hover:opacity-100 transition-opacity">
+<a href="/landing-page" class="p-10 bg-surface-container-lowest border-2 border-primary rounded-lg shadow-[4px_4px_0_0_#000] hover:-translate-y-1 hover:shadow-[7px_7px_0_0_#000] transition-all duration-300 group flex flex-col">
+<div class="mb-8 text-primary">
+<span class="material-symbols-outlined text-[40px] font-light">web_asset</span>
+</div>
+<h3 class="font-h3 text-h3 text-primary mb-4">Лендинги</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 flex-grow">Быстрые посадочные страницы для заявок, WhatsApp, услуг, цен и доверия к бизнесу.</p>
+<span class="inline-flex items-center gap-2 font-label-caps text-label-caps text-primary border-b border-primary pb-1 self-start group-hover:text-on-surface-variant group-hover:border-on-surface-variant transition-colors">Смотреть лендинги <span class="material-symbols-outlined text-sm">arrow_forward</span></span>
+</a>
+<!-- Service Card 2 -->
+<a href="/business-website" class="p-10 bg-surface-container-lowest border-2 border-primary rounded-lg shadow-[4px_4px_0_0_#000] hover:-translate-y-1 hover:shadow-[7px_7px_0_0_#000] transition-all duration-300 group flex flex-col">
+<div class="mb-8 text-primary">
 <span class="material-symbols-outlined text-[40px] font-light">language</span>
 </div>
-<h3 class="font-h3 text-h3 text-primary mb-4">Websites</h3>
-<p class="font-body-md text-body-md text-on-surface-variant">High-performance, bespoke marketing and corporate sites designed for conversion and brand authority.</p>
-</div>
-<!-- Service Card 2 -->
-<div class="p-10 bg-surface-container-lowest border border-surface-variant/50 rounded-lg hover:border-primary/20 transition-all duration-500 group">
-<div class="mb-8 text-primary opacity-70 group-hover:opacity-100 transition-opacity">
-<span class="material-symbols-outlined text-[40px] font-light">web</span>
-</div>
-<h3 class="font-h3 text-h3 text-primary mb-4">Web Applications</h3>
-<p class="font-body-md text-body-md text-on-surface-variant">Complex, scalable web apps built with modern frameworks to deliver seamless user experiences.</p>
-</div>
+<h3 class="font-h3 text-h3 text-primary mb-4">Сайты для бизнеса</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 flex-grow">Многостраничные сайты, корпоративные страницы, каталоги и онлайн-витрины для компаний.</p>
+<span class="inline-flex items-center gap-2 font-label-caps text-label-caps text-primary border-b border-primary pb-1 self-start group-hover:text-on-surface-variant group-hover:border-on-surface-variant transition-colors">Смотреть сайты <span class="material-symbols-outlined text-sm">arrow_forward</span></span>
+</a>
 <!-- Service Card 3 -->
-<div class="p-10 bg-surface-container-lowest border border-surface-variant/50 rounded-lg hover:border-primary/20 transition-all duration-500 group">
-<div class="mb-8 text-primary opacity-70 group-hover:opacity-100 transition-opacity">
+<a href="/mobile-app" class="p-10 bg-primary text-on-primary rounded-lg shadow-[4px_4px_0_0_#cfc4c5] hover:-translate-y-1 hover:shadow-[7px_7px_0_0_#cfc4c5] transition-all duration-300 group flex flex-col">
+<div class="mb-8">
 <span class="material-symbols-outlined text-[40px] font-light">smartphone</span>
 </div>
-<h3 class="font-h3 text-h3 text-primary mb-4">Mobile Apps</h3>
-<p class="font-body-md text-body-md text-on-surface-variant">Native and cross-platform mobile applications designed for engagement and utility.</p>
-</div>
+<h3 class="font-h3 text-h3 mb-4">Мобильные приложения / MVP</h3>
+<p class="font-body-md text-body-md text-on-primary/80 mb-6 flex-grow">Приложения для iOS/Android, MVP, личные кабинеты, админ-панели и продукты под бизнес-задачи.</p>
+<span class="inline-flex items-center gap-2 font-label-caps text-label-caps text-on-primary border-b border-on-primary pb-1 self-start group-hover:text-on-primary/70 transition-colors">Смотреть приложения <span class="material-symbols-outlined text-sm">arrow_forward</span></span>
+</a>
 <!-- Service Card 4 -->
-<div class="p-10 bg-surface-container-lowest border border-surface-variant/50 rounded-lg hover:border-primary/20 transition-all duration-500 group">
-<div class="mb-8 text-primary opacity-70 group-hover:opacity-100 transition-opacity">
-<span class="material-symbols-outlined text-[40px] font-light">psychology</span>
-</div>
-<h3 class="font-h3 text-h3 text-primary mb-4">AI Integrations</h3>
-<p class="font-body-md text-body-md text-on-surface-variant">Intelligent system integration leveraging LLMs and machine learning to power next-gen features.</p>
-</div>
-<!-- Service Card 5 -->
-<div class="p-10 bg-surface-container-lowest border border-surface-variant/50 rounded-lg hover:border-primary/20 transition-all duration-500 group">
-<div class="mb-8 text-primary opacity-70 group-hover:opacity-100 transition-opacity">
+<a href="/automation" class="p-10 bg-surface-container-lowest border-2 border-primary rounded-lg shadow-[4px_4px_0_0_#000] hover:-translate-y-1 hover:shadow-[7px_7px_0_0_#000] transition-all duration-300 group flex flex-col">
+<div class="mb-8 text-primary">
 <span class="material-symbols-outlined text-[40px] font-light">bolt</span>
 </div>
-<h3 class="font-h3 text-h3 text-primary mb-4">Automation</h3>
-<p class="font-body-md text-body-md text-on-surface-variant">Streamlining workflows and operations through intelligent software architecture and scripting.</p>
-</div>
-<!-- Service Card 6 -->
-<div class="p-10 bg-surface-container-lowest border border-surface-variant/50 rounded-lg hover:border-primary/20 transition-all duration-500 group">
-<div class="mb-8 text-primary opacity-70 group-hover:opacity-100 transition-opacity">
-<span class="material-symbols-outlined text-[40px] font-light">developer_board</span>
-</div>
-<h3 class="font-h3 text-h3 text-primary mb-4">Full-Stack Dev</h3>
-<p class="font-body-md text-body-md text-on-surface-variant">End-to-end engineering, from robust backend databases to pixel-perfect frontend interfaces.</p>
-</div>
+<h3 class="font-h3 text-h3 text-primary mb-4">Автоматизация и AI</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 flex-grow">WhatsApp-боты, заявки в Telegram/CRM, таблицы, уведомления, AI-интеграции и автоматизация процессов.</p>
+<span class="inline-flex items-center gap-2 font-label-caps text-label-caps text-primary border-b border-primary pb-1 self-start group-hover:text-on-surface-variant group-hover:border-on-surface-variant transition-colors">Смотреть автоматизацию <span class="material-symbols-outlined text-sm">arrow_forward</span></span>
+</a>
 </div>
 </div>
 </section>
@@ -782,13 +774,44 @@ Pricing &amp; FAQ <span class="material-symbols-outlined text-sm">arrow_forward<
 </div>
 </div>
 </section>
+<!-- SEO Block -->
+<section class="w-full bg-surface-container-low py-section-padding border-t border-surface-variant/30">
+<div class="px-margin-mobile md:px-margin-desktop max-w-container-max-width mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+<div>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest mb-4 block">О студии</span>
+<h2 class="font-h1 text-h1 text-primary mb-6">Digital-разработка для бизнеса в Казахстане</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">MONONYXX помогает бизнесам запускать сайты, лендинги, мобильные приложения, MVP, WhatsApp-ботов и автоматизацию заявок. Работаем с компаниями в Алматы, Астане, Шымкенте, Кызылорде и по всему Казахстану, а также принимаем проекты из СНГ.</p>
+</div>
+<div class="grid grid-cols-2 gap-5">
+<div class="p-6 bg-surface-container-lowest border border-surface-variant/50 rounded-lg">
+<div class="font-h2 text-h2 text-primary mb-2">50%</div>
+<p class="font-body-md text-sm text-on-surface-variant">предоплата, остаток после результата</p>
+</div>
+<div class="p-6 bg-surface-container-lowest border border-surface-variant/50 rounded-lg">
+<div class="font-h2 text-h2 text-primary mb-2">24ч+</div>
+<p class="font-body-md text-sm text-on-surface-variant">минимальный срок запуска лендинга</p>
+</div>
+<div class="p-6 bg-surface-container-lowest border border-surface-variant/50 rounded-lg">
+<div class="font-h2 text-h2 text-primary mb-2">от 20k₸</div>
+<p class="font-body-md text-sm text-on-surface-variant">начальная стоимость проекта</p>
+</div>
+<div class="p-6 bg-primary text-on-primary rounded-lg">
+<div class="font-h2 text-h2 mb-2">KZ/СНГ</div>
+<p class="font-body-md text-sm text-on-primary/80">принимаем проекты со всего региона</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
 <!-- Contact Form -->
-<section class="w-full bg-surface-container-low py-section-padding border-t border-surface-variant/30" id="contact">
+<section class="w-full bg-background py-section-padding border-t border-surface-variant/30" id="contact">
 <div class="px-margin-mobile md:px-margin-desktop max-w-container-max-width mx-auto">
 <div class="max-w-2xl mx-auto">
 <div class="text-center mb-12">
-<h2 class="font-h1 text-h1 text-primary mb-4">Start a Conversation</h2>
-<p class="font-body-md text-body-md text-on-surface-variant">Detail your requirements below and our team will review your inquiry.</p>
+<h2 class="font-h1 text-h1 text-primary mb-4">Начать диалог</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Опишите задачу ниже, и наша команда изучит ваш запрос.</p>
 </div>
 <form class="space-y-8" id="lead-form" novalidate>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -1484,6 +1507,13 @@ Pricing &amp; FAQ <span class="material-symbols-outlined text-sm">arrow_forward<
     document.querySelectorAll('.pricing-wa-btn').forEach((button) => {
         const message = button.dataset.waText || 'Здравствуйте! Хочу обсудить проект MONONYXX.';
         button.href = 'https://api.whatsapp.com/send/?phone=77089508019&text=' + encodeURIComponent(message) + '&type=phone_number&app_absent=0';
+    });
+
+    const WA_HERO_TEXT = 'Здравствуйте! Хочу обсудить проект для бизнеса. Интересует сайт / приложение / автоматизация.';
+    const WA_BASE = 'https://api.whatsapp.com/send/?phone=77089508019&type=phone_number&app_absent=0&text=';
+    ['hero-wa-btn', 'mobile-hero-wa-btn'].forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) el.href = WA_BASE + encodeURIComponent(WA_HERO_TEXT);
     });
 
     leadForm?.addEventListener('submit', async (event) => {

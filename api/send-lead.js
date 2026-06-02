@@ -30,6 +30,12 @@ module.exports = async function handler(request, response) {
     projectType,
     budget,
     description,
+    calcWhat,
+    calcGoal,
+    calcFeatures,
+    calcTimeline,
+    calcBudget,
+    page,
   } = body;
   const requiredFields = [language, name, contactMethod, contactValue, projectType, budget, description];
 
@@ -69,22 +75,33 @@ module.exports = async function handler(request, response) {
       ? `@${normalizedContactValue}`
       : normalizedContactValue;
 
-  const message = [
-    "<b>Новая заявка на проект MONONYXX</b>",
+  const messageParts = [
+    "<b>Новая заявка с сайта MONONYXX</b>",
     "",
-    "<b>Клиент</b>",
     `<b>Имя:</b> ${escapeHtml(name.trim())}`,
+    `<b>Телефон / WhatsApp:</b> <code>${escapeHtml(readableContactValue)}</code>`,
     `<b>Способ связи:</b> ${escapeHtml(readableContactMethod)}`,
-    `<b>Контакт:</b> <code>${escapeHtml(readableContactValue)}</code>`,
-    "",
-    "<b>Проект</b>",
-    `<b>Тип проекта:</b> ${escapeHtml(projectType.trim())}`,
+    `<b>Услуга:</b> ${escapeHtml(projectType.trim())}`,
     `<b>Бюджет:</b> ${escapeHtml(budget.trim())}`,
-    `<b>Язык формы:</b> ${escapeHtml(language.toUpperCase())}`,
     "",
-    "<b>Описание:</b>",
+    "<b>Сообщение:</b>",
     escapeHtml(description.trim()),
-  ].join("\n");
+  ];
+
+  const hasCalc = calcWhat || calcGoal || calcTimeline || calcBudget;
+  if (hasCalc) {
+    messageParts.push("", "<b>Калькулятор:</b>");
+    if (calcWhat) messageParts.push(`Что хочет создать: ${escapeHtml(String(calcWhat))}`);
+    if (calcGoal) messageParts.push(`Цель: ${escapeHtml(String(calcGoal))}`);
+    if (calcFeatures) messageParts.push(`Что нужно внутри: ${escapeHtml(Array.isArray(calcFeatures) ? calcFeatures.join(", ") : String(calcFeatures))}`);
+    if (calcTimeline) messageParts.push(`Сроки: ${escapeHtml(String(calcTimeline))}`);
+    if (calcBudget) messageParts.push(`Бюджет (калькулятор): ${escapeHtml(String(calcBudget))}`);
+  }
+
+  if (page) messageParts.push("", `<b>Страница:</b> ${escapeHtml(String(page))}`);
+  messageParts.push(`<b>Время:</b> ${new Date().toLocaleString("ru-RU", { timeZone: "Asia/Almaty" })}`);
+
+  const message = messageParts.join("\n");
 
   const telegramResponse = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
     method: "POST",

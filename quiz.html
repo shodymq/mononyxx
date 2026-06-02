@@ -44,6 +44,7 @@ html, body { overflow-x: hidden; max-width: 100%; }
 .quiz-option { cursor:pointer; transition:border-color 150ms, background 150ms; }
 .quiz-option.selected { border-color:#000000; background:#1a1c1a; color:#ffffff; }
 .quiz-option.selected .quiz-option-label { color:#ffffff; }
+.text-error { color: #ba1a1a; }
 </style>
 </head>
 <body class="bg-background text-on-background font-body-md antialiased selection:bg-primary selection:text-on-primary">
@@ -101,10 +102,10 @@ html, body { overflow-x: hidden; max-width: 100%; }
             <!-- Progress bar -->
             <div class="mb-8" id="quiz-progress-wrap">
                 <div class="flex justify-between items-center mb-3">
-                    <span class="font-label-caps text-label-caps text-on-surface-variant" id="quiz-step-label">Шаг 1 из 4</span>
+                    <span class="font-label-caps text-label-caps text-on-surface-variant" id="quiz-step-label">Шаг 1 из 5</span>
                 </div>
                 <div class="h-1.5 bg-surface-container rounded-full overflow-hidden">
-                    <div class="h-full bg-primary rounded-full transition-all duration-300" id="quiz-progress-bar" style="width: 25%"></div>
+                    <div class="h-full bg-primary rounded-full transition-all duration-300" id="quiz-progress-bar" style="width: 20%"></div>
                 </div>
             </div>
 
@@ -125,25 +126,54 @@ html, body { overflow-x: hidden; max-width: 100%; }
 
             <!-- Result -->
             <div class="hidden" id="quiz-result">
-                <div class="text-center mb-8">
-                    <div class="font-label-caps text-label-caps text-on-surface-variant mb-3">Примерная стоимость</div>
-                    <div class="font-h1 text-[2rem] md:text-h1 text-primary" id="quiz-price-range"></div>
+                <div id="quiz-result-form">
+                    <div class="text-center mb-8">
+                        <div class="font-label-caps text-label-caps text-on-surface-variant mb-3">Примерная стоимость</div>
+                        <div class="font-h1 text-[2rem] md:text-h1 text-primary" id="quiz-price-range"></div>
+                    </div>
+                    <p class="font-body-md text-sm text-on-surface-variant mb-8 text-center">Точная цена зависит от деталей проекта. Оставьте WhatsApp — мы напишем, уточним задачу и предложим лучший вариант.</p>
+                    <div class="space-y-5">
+                        <div>
+                            <label class="font-label-caps text-label-caps text-on-surface-variant mb-2 block" for="quiz-name">Ваше имя</label>
+                            <input type="text" id="quiz-name" placeholder="Как вас зовут?"
+                                   class="w-full bg-transparent border-b border-surface-variant focus:border-primary focus:outline-none font-body-md text-primary px-0 py-3 transition-colors"/>
+                        </div>
+                        <div>
+                            <label class="font-label-caps text-label-caps text-on-surface-variant mb-2 block" for="quiz-phone">WhatsApp / телефон</label>
+                            <input type="tel" id="quiz-phone" placeholder="+7 (___) ___-__-__" inputmode="tel"
+                                   class="w-full bg-transparent border-b border-surface-variant focus:border-primary focus:outline-none font-body-md text-primary px-0 py-3 transition-colors"/>
+                        </div>
+                        <div>
+                            <label class="font-label-caps text-label-caps text-on-surface-variant mb-2 block" for="quiz-comment">Комментарий <span class="opacity-50">(необязательно)</span></label>
+                            <input type="text" id="quiz-comment" placeholder="Кратко о проекте..."
+                                   class="w-full bg-transparent border-b border-surface-variant focus:border-primary focus:outline-none font-body-md text-primary px-0 py-3 transition-colors"/>
+                        </div>
+                    </div>
+                    <p class="hidden font-body-md text-sm text-error mt-4" id="quiz-error-msg"></p>
+                    <button id="quiz-submit-btn" type="button"
+                       class="mt-6 w-full inline-flex items-center justify-center py-4 bg-primary text-on-primary font-label-caps text-label-caps rounded hover:bg-tertiary-container transition-colors">
+                        Получить расчёт в WhatsApp
+                    </button>
+                    <button id="quiz-restart-btn" type="button"
+                            class="w-full mt-3 py-3 text-on-surface-variant font-label-caps text-label-caps hover:text-primary transition-colors">
+                        Пройти заново
+                    </button>
                 </div>
-                <div class="mb-6">
-                    <label class="font-label-caps text-label-caps text-on-surface-variant mb-2 block" for="quiz-phone">
-                        Ваш номер телефона (необязательно)
-                    </label>
-                    <input type="tel" id="quiz-phone" placeholder="+7 (___) ___-__-__" inputmode="tel"
-                           class="w-full bg-transparent border-b border-surface-variant focus:border-primary focus:outline-none font-body-md text-body-md text-primary px-0 py-3 transition-colors"/>
+                <div class="hidden text-center" id="quiz-success">
+                    <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6">
+                        <span class="material-symbols-outlined text-primary text-[32px]">check_circle</span>
+                    </div>
+                    <h3 class="font-h3 text-h3 text-primary mb-3">Заявка отправлена!</h3>
+                    <p class="font-body-md text-sm text-on-surface-variant mb-6">Мы напишем вам в WhatsApp в ближайшее время.</p>
+                    <a id="quiz-wa-direct" href="#" target="_blank" rel="noopener"
+                       class="w-full inline-flex items-center justify-center py-4 bg-primary text-on-primary font-label-caps text-label-caps rounded hover:bg-tertiary-container transition-colors mb-3">
+                        Открыть WhatsApp
+                    </a>
+                    <button id="quiz-restart-btn-2" type="button"
+                            class="w-full py-3 text-on-surface-variant font-label-caps text-label-caps hover:text-primary transition-colors">
+                        Пройти заново
+                    </button>
                 </div>
-                <a id="quiz-wa-send-btn" href="#" target="_blank" rel="noopener"
-                   class="w-full inline-flex items-center justify-center py-4 bg-primary text-on-primary font-label-caps text-label-caps rounded hover:bg-tertiary-container transition-colors">
-                    Отправить в WhatsApp
-                </a>
-                <button id="quiz-restart-btn" type="button"
-                        class="w-full mt-4 py-3 text-on-surface-variant font-label-caps text-label-caps hover:text-primary transition-colors">
-                    Пройти заново
-                </button>
             </div>
 
         </div>
@@ -213,13 +243,35 @@ html, body { overflow-x: hidden; max-width: 100%; }
         menuPanel.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setMenuOpen(false); }); });
     }
 
-    // Quiz
-    var quizState = { step: 0, answers: { q1: null, q2: null, q3: [], q4: null } };
+    // Quiz state
+    var quizState = { step: 0, answers: { q1: null, q2: null, q3: [], q4: null, q5: null } };
+    var TOTAL_STEPS = 5;
+
     var QUIZ_STEPS = [
-        { key: 'q1', question: 'Что вам нужно?', type: 'radio', options: ['Лендинг', 'Сайт', 'Приложение', 'Автоматизация'] },
-        { key: 'q2', question: 'Для какого бизнеса?', type: 'radio', options: ['Автосалон', 'Магазин', 'Услуги', 'Кафе', 'Другое'] },
-        { key: 'q3', question: 'Что должно быть?', type: 'multi', options: ['WhatsApp', 'Заявки', 'Админка', 'Каталог', 'Онлайн-оплата'] },
-        { key: 'q4', question: 'Когда нужно?', type: 'radio', options: ['Срочно', 'За неделю', 'В течение месяца'] }
+        {
+            key: 'q1', question: 'Что хотите создать?', type: 'radio',
+            options: ['Лендинг', 'Многостраничный сайт', 'Мобильное приложение / MVP', 'Автоматизация / WhatsApp-бот', 'Не знаю, нужна консультация']
+        },
+        {
+            key: 'q2', question: 'Какая цель?', type: 'radio',
+            getOptions: function(a) {
+                return a.q1 === 'Мобильное приложение / MVP'
+                    ? ['Проверить идею', 'Сделать MVP', 'Личный кабинет', 'Бронирование / запись', 'Маркетплейс / доставка', 'Внутренняя CRM']
+                    : ['Получать заявки', 'Показать услуги и цены', 'Сделать каталог', 'Упаковать бренд', 'Запустить рекламу'];
+            }
+        },
+        {
+            key: 'q3', question: 'Что нужно внутри?', type: 'multi',
+            options: ['Дизайн', 'Адаптация под телефон', 'Форма заявки', 'WhatsApp-кнопка', 'Админ-панель', 'База данных', 'Авторизация', 'Оплаты', 'Push-уведомления', 'Telegram/CRM-уведомления', 'AI/бот']
+        },
+        {
+            key: 'q4', question: 'Сроки', type: 'radio',
+            options: ['Срочно, до 3 дней', '1 неделя', '2–3 недели', 'Месяц+', 'Пока просто оцениваю']
+        },
+        {
+            key: 'q5', question: 'Бюджет', type: 'radio',
+            options: ['До 50 000 ₸', '50 000–100 000 ₸', '100 000–250 000 ₸', '250 000–500 000 ₸', '500 000+ ₸', 'Хочу понять цену']
+        }
     ];
 
     var qArea = document.getElementById('quiz-question-area');
@@ -231,16 +283,81 @@ html, body { overflow-x: hidden; max-width: 100%; }
     var progressWrap = document.getElementById('quiz-progress-wrap');
     var resultDiv = document.getElementById('quiz-result');
     var priceRange = document.getElementById('quiz-price-range');
-    var quizWaSendBtn = document.getElementById('quiz-wa-send-btn');
     var quizRestartBtn = document.getElementById('quiz-restart-btn');
-    var quizPhone = document.getElementById('quiz-phone');
+    var quizRestartBtn2 = document.getElementById('quiz-restart-btn-2');
+    var quizSubmitBtn = document.getElementById('quiz-submit-btn');
+    var quizSuccessDiv = document.getElementById('quiz-success');
+    var quizResultForm = document.getElementById('quiz-result-form');
+    var quizWaDirect = document.getElementById('quiz-wa-direct');
+    var quizErrorMsg = document.getElementById('quiz-error-msg');
+
+    function getStepOptions(step) {
+        return typeof step.getOptions === 'function' ? step.getOptions(quizState.answers) : step.options;
+    }
+
+    function calcPrice() {
+        var q1 = quizState.answers.q1 || '';
+        var q3 = quizState.answers.q3;
+        var q5 = quizState.answers.q5 || '';
+
+        var budgetMap = {
+            'До 50 000 ₸': { min: 19990, max: 49990 },
+            '50 000–100 000 ₸': { min: 49990, max: 99990 },
+            '100 000–250 000 ₸': { min: 99990, max: 249990 },
+            '250 000–500 000 ₸': { min: 199990, max: 499000 },
+            '500 000+ ₸': { min: 399000, max: null }
+        };
+
+        if (budgetMap[q5]) return budgetMap[q5];
+
+        var basePrices = {
+            'Лендинг': { min: 19990, max: 34990 },
+            'Многостраничный сайт': { min: 49990, max: 99990 },
+            'Мобильное приложение / MVP': { min: 199990, max: 399000 },
+            'Автоматизация / WhatsApp-бот': { min: 39990, max: 99990 },
+            'Не знаю, нужна консультация': { min: 19990, max: 99990 }
+        };
+        var bp = basePrices[q1] || { min: 29990, max: 99990 };
+        var mult = 1;
+        if (q3.indexOf('Админ-панель') !== -1) mult += 0.25;
+        if (q3.indexOf('База данных') !== -1) mult += 0.15;
+        if (q3.indexOf('Авторизация') !== -1) mult += 0.15;
+        if (q3.indexOf('Оплаты') !== -1) mult += 0.35;
+        if (q3.indexOf('AI/бот') !== -1) mult += 0.4;
+        return {
+            min: Math.ceil(bp.min * mult / 1000) * 1000,
+            max: bp.max ? Math.ceil(bp.max * mult / 1000) * 1000 : null
+        };
+    }
+
+    function formatPrice(p) {
+        var minStr = p.min.toLocaleString('ru-KZ') + ' ₸';
+        return p.max ? 'от ' + minStr + ' до ' + p.max.toLocaleString('ru-KZ') + ' ₸' : 'от ' + minStr;
+    }
+
+    function buildWaText(name, phone, comment) {
+        var a = quizState.answers;
+        var p = calcPrice();
+        var lines = ['Здравствуйте! Прошёл(а) калькулятор на сайте MONONYXX.', ''];
+        if (name) lines.push('Имя: ' + name);
+        if (phone) lines.push('Телефон: ' + phone);
+        lines.push('');
+        lines.push('Что хочу создать: ' + (a.q1 || '—'));
+        lines.push('Цель: ' + (a.q2 || '—'));
+        if (a.q3.length) lines.push('Что нужно: ' + a.q3.join(', '));
+        lines.push('Сроки: ' + (a.q4 || '—'));
+        lines.push('Бюджет: ' + (a.q5 || '—'));
+        lines.push('');
+        lines.push('Примерная стоимость: ' + formatPrice(p));
+        if (comment) lines.push('Комментарий: ' + comment);
+        return lines.join('\n');
+    }
 
     function renderQuiz() {
-        var totalSteps = QUIZ_STEPS.length;
         var step = quizState.step;
-        if (step >= totalSteps) { showResult(); return; }
-
+        if (step >= TOTAL_STEPS) { showResult(); return; }
         var stepData = QUIZ_STEPS[step];
+        var opts = getStepOptions(stepData);
         var currentAnswer = quizState.answers[stepData.key];
 
         progressWrap.classList.remove('hidden');
@@ -248,23 +365,26 @@ html, body { overflow-x: hidden; max-width: 100%; }
         resultDiv.classList.add('hidden');
         qArea.classList.remove('hidden');
 
-        var pct = Math.round(((step + 1) / totalSteps) * 100);
+        var pct = Math.round(((step + 1) / TOTAL_STEPS) * 100);
         progressBar.style.width = pct + '%';
-        stepLabel.textContent = 'Шаг ' + (step + 1) + ' из ' + totalSteps;
+        stepLabel.textContent = 'Шаг ' + (step + 1) + ' из ' + TOTAL_STEPS;
         backBtn.disabled = (step === 0);
-        nextBtn.textContent = (step === totalSteps - 1) ? 'Рассчитать' : 'Далее';
+        nextBtn.textContent = (step === TOTAL_STEPS - 1) ? 'Рассчитать' : 'Далее';
         nextBtn.disabled = stepData.type === 'multi' ? false : !currentAnswer;
 
-        var html = '<p class="font-h3 text-h3 text-primary mb-6">' + stepData.question + '</p>';
-        html += '<div class="flex flex-col gap-3" id="quiz-options">';
-        stepData.options.forEach(function (opt) {
-            var isSelected = stepData.type === 'multi'
+        var isMulti = stepData.type === 'multi';
+        var html = '<p class="font-h3 text-h3 text-primary mb-2">' + stepData.question + '</p>';
+        if (isMulti) html += '<p class="font-body-md text-sm text-on-surface-variant mb-5">Можно выбрать несколько</p>';
+        else html += '<p class="font-body-md text-sm text-on-surface-variant mb-5"> </p>';
+        html += '<div class="' + (isMulti ? 'grid grid-cols-1 sm:grid-cols-2' : 'flex flex-col') + ' gap-3" id="quiz-options">';
+        opts.forEach(function (opt) {
+            var isSelected = isMulti
                 ? quizState.answers.q3.indexOf(opt) !== -1
                 : currentAnswer === opt;
             html += '<button type="button" class="quiz-option' + (isSelected ? ' selected' : '') +
-                ' flex items-center gap-4 px-5 py-4 border border-surface-variant rounded-lg text-left min-h-[56px] hover:border-primary/40 transition-all"' +
-                ' data-option="' + opt + '">' +
-                '<span class="quiz-option-label font-body-md text-body-md text-on-surface">' + opt + '</span>' +
+                ' flex items-center gap-3 px-4 py-3 border border-surface-variant rounded-lg text-left hover:border-primary/40 transition-all"' +
+                ' data-option="' + opt.replace(/"/g, '&quot;') + '">' +
+                '<span class="quiz-option-label font-body-md text-sm text-on-surface">' + opt + '</span>' +
                 '</button>';
         });
         html += '</div>';
@@ -273,9 +393,10 @@ html, body { overflow-x: hidden; max-width: 100%; }
         qArea.querySelectorAll('.quiz-option').forEach(function (btn) {
             btn.addEventListener('click', function () {
                 var val = btn.getAttribute('data-option');
-                if (stepData.type === 'multi') {
+                if (isMulti) {
                     var idx = quizState.answers.q3.indexOf(val);
-                    if (idx === -1) { quizState.answers.q3.push(val); } else { quizState.answers.q3.splice(idx, 1); }
+                    if (idx === -1) quizState.answers.q3.push(val);
+                    else quizState.answers.q3.splice(idx, 1);
                 } else {
                     quizState.answers[stepData.key] = val;
                     nextBtn.disabled = false;
@@ -285,54 +406,90 @@ html, body { overflow-x: hidden; max-width: 100%; }
         });
     }
 
-    function calcPrice() {
-        var basePrices = { 'Лендинг': 29990, 'Сайт': 49990, 'Приложение': 199990, 'Автоматизация': 69990 };
-        var base = basePrices[quizState.answers.q1] || 29990;
-        var multiplier = 1;
-        if (quizState.answers.q3.indexOf('Админка') !== -1) multiplier += 0.30;
-        if (quizState.answers.q3.indexOf('Онлайн-оплата') !== -1) multiplier += 0.50;
-        if (quizState.answers.q3.indexOf('Каталог') !== -1) multiplier += 0.20;
-        return {
-            min: Math.ceil(base * multiplier / 1000) * 1000,
-            max: Math.ceil(base * multiplier * 1.4 / 1000) * 1000
-        };
-    }
-
-    function updateQuizWaLink() {
-        var p = calcPrice();
-        var phone = quizPhone ? quizPhone.value.trim() : '';
-        var text = 'Здравствуйте! Прошёл(а) квиз на сайте.\n\n' +
-            'Что нужно: ' + (quizState.answers.q1 || '—') + '\n' +
-            'Тип бизнеса: ' + (quizState.answers.q2 || '—') + '\n' +
-            'Что должно быть: ' + (quizState.answers.q3.length ? quizState.answers.q3.join(', ') : '—') + '\n' +
-            'Сроки: ' + (quizState.answers.q4 || '—') + '\n' +
-            (phone ? 'Телефон: ' + phone + '\n' : '') +
-            '\nПримерная стоимость по квизу: от ' + p.min.toLocaleString('ru-KZ') + ' ₸ до ' + p.max.toLocaleString('ru-KZ') + ' ₸\n' +
-            '\nПодскажите примерную цену, пожалуйста.';
-        if (quizWaSendBtn) quizWaSendBtn.href = buildWhatsAppLink(text);
-    }
-
     function showResult() {
         qArea.classList.add('hidden');
         navWrap.classList.add('hidden');
         progressWrap.classList.add('hidden');
         resultDiv.classList.remove('hidden');
+        if (quizResultForm) quizResultForm.classList.remove('hidden');
+        if (quizSuccessDiv) quizSuccessDiv.classList.add('hidden');
         var p = calcPrice();
-        priceRange.textContent = 'от ' + p.min.toLocaleString('ru-KZ') + ' ₸ до ' + p.max.toLocaleString('ru-KZ') + ' ₸';
-        updateQuizWaLink();
-        quizPhone && quizPhone.addEventListener('input', updateQuizWaLink);
+        if (priceRange) priceRange.textContent = formatPrice(p);
     }
 
-    backBtn && backBtn.addEventListener('click', function () { if (quizState.step > 0) { quizState.step--; renderQuiz(); } });
+    function doRestart() {
+        quizState.step = 0;
+        quizState.answers = { q1: null, q2: null, q3: [], q4: null, q5: null };
+        renderQuiz();
+    }
+
+    backBtn && backBtn.addEventListener('click', function () {
+        if (quizState.step > 0) { quizState.step--; renderQuiz(); }
+    });
     nextBtn && nextBtn.addEventListener('click', function () {
-        if (quizState.step < QUIZ_STEPS.length - 1) { quizState.step++; } else { quizState.step = QUIZ_STEPS.length; }
+        if (quizState.step < TOTAL_STEPS - 1) quizState.step++;
+        else quizState.step = TOTAL_STEPS;
         renderQuiz();
     });
-    quizRestartBtn && quizRestartBtn.addEventListener('click', function () {
-        quizState.step = 0;
-        quizState.answers = { q1: null, q2: null, q3: [], q4: null };
-        if (quizPhone) quizPhone.value = '';
-        renderQuiz();
+    quizRestartBtn && quizRestartBtn.addEventListener('click', doRestart);
+    quizRestartBtn2 && quizRestartBtn2.addEventListener('click', doRestart);
+
+    quizSubmitBtn && quizSubmitBtn.addEventListener('click', async function () {
+        var name = (document.getElementById('quiz-name') || {}).value || '';
+        var phone = (document.getElementById('quiz-phone') || {}).value || '';
+        var comment = (document.getElementById('quiz-comment') || {}).value || '';
+
+        if (!name.trim() || !phone.trim()) {
+            if (quizErrorMsg) {
+                quizErrorMsg.textContent = 'Пожалуйста, укажите имя и WhatsApp/телефон.';
+                quizErrorMsg.classList.remove('hidden');
+            }
+            return;
+        }
+        if (quizErrorMsg) quizErrorMsg.classList.add('hidden');
+
+        var a = quizState.answers;
+        var p = calcPrice();
+        var waText = buildWaText(name.trim(), phone.trim(), comment.trim());
+        var waLink = buildWhatsAppLink(waText);
+
+        quizSubmitBtn.disabled = true;
+        quizSubmitBtn.textContent = 'Отправка...';
+
+        // Send to Telegram
+        try {
+            await fetch('/api/send-lead', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    language: 'ru',
+                    name: name.trim(),
+                    contactMethod: 'whatsapp',
+                    contactMethodLabel: 'WhatsApp',
+                    contactValue: phone.trim(),
+                    projectType: a.q1 || 'Не указано',
+                    budget: a.q5 || '—',
+                    description: comment.trim() || 'Через калькулятор',
+                    calcWhat: a.q1,
+                    calcGoal: a.q2,
+                    calcFeatures: a.q3,
+                    calcTimeline: a.q4,
+                    calcBudget: a.q5,
+                    page: '/quiz'
+                })
+            });
+        } catch (e) {
+            // Silent — WA will still open
+        }
+
+        // Show success & open WA
+        if (quizResultForm) quizResultForm.classList.add('hidden');
+        if (quizSuccessDiv) quizSuccessDiv.classList.remove('hidden');
+        if (quizWaDirect) quizWaDirect.href = waLink;
+        window.open(waLink, '_blank');
+
+        quizSubmitBtn.disabled = false;
+        quizSubmitBtn.textContent = 'Получить расчёт в WhatsApp';
     });
 
     renderQuiz();

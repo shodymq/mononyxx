@@ -67,11 +67,11 @@ body.page-returning { animation: pageEnter 380ms ease both; }
             <span class="sr-only">MONONYXX</span>
         </a>
         <div class="hidden md:flex items-center gap-10">
-            <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="/code.html#services">УСЛУГИ</a>
-            <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="/code.html#portfolio">ПОРТФОЛИО</a>
+            <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="/">ГЛАВНАЯ</a>
+            <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="/#services">УСЛУГИ</a>
             <a class="font-label-caps text-label-caps text-primary" href="/pricing">ЦЕНЫ</a>
-            <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="/code.html#reviews">ОТЗЫВЫ</a>
-            <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="/code.html#process">ПРОЦЕСС</a>
+            <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="/cases">КЕЙСЫ</a>
+            <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="/quiz">РАССЧИТАТЬ</a>
         </div>
         <div aria-label="Переключатель языка" class="language-switch hidden md:flex items-center border border-surface-variant rounded overflow-hidden" role="group">
             <button aria-pressed="false" class="px-3 py-2 font-label-caps text-label-caps text-primary transition-colors" data-lang-control="en" type="button">EN</button>
@@ -88,11 +88,11 @@ body.page-returning { animation: pageEnter 380ms ease both; }
     </nav>
     <div class="mobile-menu-panel md:hidden border-t border-surface-variant/40 bg-background/95 px-margin-mobile pb-8 pt-2" id="mobile-menu">
         <div class="flex flex-col gap-5">
-            <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors duration-300" href="/code.html#services">УСЛУГИ</a>
-            <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors duration-300" href="/code.html#portfolio">ПОРТФОЛИО</a>
+            <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors duration-300" href="/">ГЛАВНАЯ</a>
+            <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors duration-300" href="/#services">УСЛУГИ</a>
             <a class="font-label-caps text-label-caps text-primary" href="/pricing">ЦЕНЫ</a>
-            <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors duration-300" href="/code.html#reviews">ОТЗЫВЫ</a>
-            <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors duration-300" href="/code.html#process">ПРОЦЕСС</a>
+            <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors duration-300" href="/cases">КЕЙСЫ</a>
+            <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors duration-300" href="/quiz">РАССЧИТАТЬ</a>
             <a id="mobile-nav-wa-cta" href="#" target="_blank" rel="noopener"
                class="inline-flex px-5 py-3 bg-primary text-on-primary font-label-caps text-label-caps rounded items-center justify-center hover:bg-tertiary-container transition-colors duration-300">
                 Напишите нам
@@ -182,6 +182,90 @@ body.page-returning { animation: pageEnter 380ms ease both; }
                 <a class="inline-flex items-center gap-2 font-label-caps text-label-caps text-primary border-b border-primary pb-1 hover:text-on-surface-variant hover:border-on-surface-variant transition-colors" href="#" target="_blank" rel="noopener" id="mobile-pricing-contact">
                     Напишите нам <span class="material-symbols-outlined text-sm">arrow_forward</span>
                 </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculator CTA -->
+    <section class="w-full bg-primary py-20 border-t border-surface-variant/30">
+        <div class="px-margin-mobile md:px-margin-desktop max-w-container-max-width mx-auto text-center">
+            <span class="font-label-caps text-label-caps text-on-primary/70 uppercase tracking-widest mb-4 block">Не знаете с чего начать?</span>
+            <h2 class="font-h1 text-h1 text-on-primary mb-6">Рассчитайте примерную стоимость проекта за 1 минуту</h2>
+            <p class="font-body-lg text-body-lg text-on-primary/80 mb-10 max-w-xl mx-auto">Ответьте на 5 вопросов — покажем примерную цену и предложим подходящий формат.</p>
+            <a href="/quiz" class="inline-flex items-center justify-center px-8 py-4 bg-on-primary text-primary font-label-caps text-label-caps rounded hover:bg-surface-container transition-colors">
+                Рассчитать стоимость →
+            </a>
+        </div>
+    </section>
+
+    <!-- Detailed service sections -->
+    <section class="w-full bg-background py-section-padding border-t border-surface-variant/30">
+        <div class="px-margin-mobile md:px-margin-desktop max-w-container-max-width mx-auto">
+            <div class="mb-16">
+                <span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest mb-4 block">Подробные тарифы</span>
+                <h2 class="font-h1 text-h1 text-primary">По категориям услуг</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Лендинги -->
+                <div class="flex flex-col bg-surface-container-lowest border-2 border-primary rounded-lg p-6 shadow-[4px_4px_0_0_#000]">
+                    <div class="w-10 h-10 rounded-full border-2 border-primary flex items-center justify-center mb-4"><span class="material-symbols-outlined text-[24px] text-primary">web_asset</span></div>
+                    <h3 class="font-h3 text-h3 text-primary mb-2">Лендинги</h3>
+                    <p class="font-body-md text-sm text-on-surface-variant mb-4">Быстрые посадочные страницы для заявок и WhatsApp.</p>
+                    <div class="font-h2 text-[24px] text-primary mb-4">от 19&nbsp;990&nbsp;₸</div>
+                    <ul class="space-y-1 mb-5 flex-grow">
+                        <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm text-primary mt-0.5">check</span><span class="font-body-md text-sm text-primary">Старт — 19 990 ₸ (2–3 блока)</span></li>
+                        <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm text-primary mt-0.5">check</span><span class="font-body-md text-sm text-primary">Бизнес — 29 990 ₸ (5–6 блоков + WhatsApp)</span></li>
+                        <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm text-primary mt-0.5">check</span><span class="font-body-md text-sm text-primary">Бизнес+ — 34 990 ₸ (+ автоответы + аналитика)</span></li>
+                    </ul>
+                    <a href="/landing-page" class="inline-flex items-center gap-2 font-label-caps text-label-caps text-primary border-b border-primary pb-1 self-start hover:text-on-surface-variant hover:border-on-surface-variant transition-colors">
+                        Подробнее <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                    </a>
+                </div>
+                <!-- Сайты -->
+                <div class="flex flex-col bg-surface-container-lowest border-2 border-primary rounded-lg p-6 shadow-[4px_4px_0_0_#000]">
+                    <div class="w-10 h-10 rounded-full border-2 border-primary flex items-center justify-center mb-4"><span class="material-symbols-outlined text-[24px] text-primary">language</span></div>
+                    <h3 class="font-h3 text-h3 text-primary mb-2">Сайты для бизнеса</h3>
+                    <p class="font-body-md text-sm text-on-surface-variant mb-4">Многостраничные сайты, каталоги, заявки онлайн.</p>
+                    <div class="font-h2 text-[24px] text-primary mb-4">от 49&nbsp;990&nbsp;₸</div>
+                    <ul class="space-y-1 mb-5 flex-grow">
+                        <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm text-primary mt-0.5">check</span><span class="font-body-md text-sm text-primary">Старт — 49 990 ₸ (3 страницы)</span></li>
+                        <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm text-primary mt-0.5">check</span><span class="font-body-md text-sm text-primary">Бизнес — 79 990 ₸ (5–7 страниц + заявки)</span></li>
+                        <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm text-primary mt-0.5">check</span><span class="font-body-md text-sm text-primary">Бизнес+ — 99 990 ₸ (+ WhatsApp-бот + CRM)</span></li>
+                    </ul>
+                    <a href="/business-website" class="inline-flex items-center gap-2 font-label-caps text-label-caps text-primary border-b border-primary pb-1 self-start hover:text-on-surface-variant hover:border-on-surface-variant transition-colors">
+                        Подробнее <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                    </a>
+                </div>
+                <!-- Приложения -->
+                <div class="flex flex-col bg-primary text-on-primary border-2 border-primary rounded-lg p-6 shadow-[4px_4px_0_0_#cfc4c5]">
+                    <div class="w-10 h-10 rounded-full border-2 border-on-primary flex items-center justify-center mb-4"><span class="material-symbols-outlined text-[24px] text-on-primary">smartphone</span></div>
+                    <h3 class="font-h3 text-h3 mb-2">Мобильные приложения / MVP</h3>
+                    <p class="font-body-md text-sm text-on-primary/80 mb-4">Приложения для iOS/Android, MVP, личные кабинеты, CRM.</p>
+                    <div class="font-h2 text-[24px] mb-4">от 199&nbsp;990&nbsp;₸</div>
+                    <ul class="space-y-1 mb-5 flex-grow">
+                        <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm mt-0.5">check</span><span class="font-body-md text-sm">MVP Lite — 199 990 ₸ (2–3 экрана)</span></li>
+                        <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm mt-0.5">check</span><span class="font-body-md text-sm">MVP для бизнеса — 259 000 ₸ (авторизация + CRM)</span></li>
+                        <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm mt-0.5">check</span><span class="font-body-md text-sm">MVP Pro — от 399 000 ₸ (платежи + роли)</span></li>
+                    </ul>
+                    <a href="/mobile-app" class="inline-flex items-center gap-2 font-label-caps text-label-caps text-on-primary border-b border-on-primary pb-1 self-start hover:text-on-primary/70 transition-colors">
+                        Подробнее <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                    </a>
+                </div>
+                <!-- Автоматизация -->
+                <div class="flex flex-col bg-surface-container-lowest border-2 border-primary rounded-lg p-6 shadow-[4px_4px_0_0_#000]">
+                    <div class="w-10 h-10 rounded-full border-2 border-primary flex items-center justify-center mb-4"><span class="material-symbols-outlined text-[24px] text-primary">bolt</span></div>
+                    <h3 class="font-h3 text-h3 text-primary mb-2">Автоматизация и AI</h3>
+                    <p class="font-body-md text-sm text-on-surface-variant mb-4">WhatsApp-боты, заявки в Telegram, CRM, AI-интеграции.</p>
+                    <div class="font-h2 text-[24px] text-primary mb-4">от 39&nbsp;990&nbsp;₸</div>
+                    <ul class="space-y-1 mb-5 flex-grow">
+                        <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm text-primary mt-0.5">check</span><span class="font-body-md text-sm text-primary">Простая автоматизация — 39 990 ₸</span></li>
+                        <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm text-primary mt-0.5">check</span><span class="font-body-md text-sm text-primary">WhatsApp / Telegram система — 69 990 ₸</span></li>
+                        <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm text-primary mt-0.5">check</span><span class="font-body-md text-sm text-primary">AI / CRM / интеграции — индивидуально</span></li>
+                    </ul>
+                    <a href="/automation" class="inline-flex items-center gap-2 font-label-caps text-label-caps text-primary border-b border-primary pb-1 self-start hover:text-on-surface-variant hover:border-on-surface-variant transition-colors">
+                        Подробнее <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -276,11 +360,13 @@ body.page-returning { animation: pageEnter 380ms ease both; }
                 <img alt="MONONYXX" class="h-8 w-auto" src="/mononyxx-logo.png"/>
             </a>
             <nav class="flex flex-wrap gap-x-8 gap-y-3">
-                <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="/code.html#services">Услуги</a>
-                <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="/code.html#portfolio">Портфолио</a>
+                <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="/">Главная</a>
+                <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="/landing-page">Лендинги</a>
+                <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="/business-website">Сайты</a>
+                <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="/mobile-app">Приложения</a>
+                <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="/automation">Автоматизация</a>
                 <a class="font-label-caps text-label-caps text-primary" href="/pricing">Цены</a>
-                <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="/code.html#reviews">Отзывы</a>
-                <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="/code.html#process">Процесс</a>
+                <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="/quiz">Калькулятор</a>
             </nav>
             <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors"
                href="https://www.instagram.com/mononyxx/" target="_blank" rel="noopener">Instagram</a>
