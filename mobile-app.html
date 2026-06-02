@@ -100,115 +100,138 @@ body.page-leaving { animation: pageLeave 220ms ease both; pointer-events:none; }
     <section class="w-full bg-surface-container-low py-section-padding border-t border-surface-variant/30">
         <div class="px-margin-mobile md:px-margin-desktop max-w-container-max-width mx-auto">
             <div class="mb-12">
-                <span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest mb-4 block">Тарифы</span>
-                <h2 class="font-h1 text-h1 text-primary">Выберите пакет</h2>
+                <span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest mb-2 block">Мобильные приложения / MVP</span>
+                <h2 class="font-h1 text-h1 text-primary mb-2">Варианты приложения / MVP</h2>
+                <p class="font-body-lg text-body-lg text-on-surface-variant">Разработка мобильных приложений под ваши задачи и рост бизнеса</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Vertical card layout -->
+            <div class="flex flex-col gap-6 max-w-3xl">
+
                 <!-- Тест идеи -->
-                <div class="relative flex flex-col bg-surface-container-lowest border-2 border-primary rounded-lg p-6 shadow-[4px_4px_0_0_#000] transition-all duration-300 hover:-translate-y-1 hover:shadow-[7px_7px_0_0_#000]">
-                    <div class="inline-block font-label-caps text-label-caps text-primary border border-primary/30 px-3 py-1 rounded-full mb-3 self-start">MVP Lite</div>
-                    <div class="font-label-caps text-label-caps text-on-surface-variant mb-2">ТЕСТ ИДЕИ</div>
-                    <div class="font-h2 text-[30px] text-primary leading-tight mb-1">от 199&nbsp;990&nbsp;₸</div>
-                    <p class="font-body-md text-sm text-on-surface-variant mb-6">Минимальное приложение для проверки гипотезы и быстрого старта.</p>
-                    <div class="flex-grow">
-                        <div class="font-label-caps text-label-caps text-primary mb-3">Включено:</div>
-                        <ul class="space-y-2 mb-5">
-                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm text-primary mt-0.5">check</span><span class="font-body-md text-sm text-primary">2–3 экрана</span></li>
-                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm text-primary mt-0.5">check</span><span class="font-body-md text-sm text-primary">Простая логика</span></li>
-                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm text-primary mt-0.5">check</span><span class="font-body-md text-sm text-primary">Быстрый запуск от 7 дней</span></li>
-                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm text-primary mt-0.5">check</span><span class="font-body-md text-sm text-primary">Техническая поддержка 3 дня</span></li>
-                        </ul>
-                        <div class="font-label-caps text-label-caps text-on-surface-variant mb-3">Не включено:</div>
-                        <ul class="space-y-2 mb-6">
-                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm text-on-surface-variant mt-0.5">close</span><span class="font-body-md text-sm text-on-surface-variant">Без регистрации пользователей</span></li>
-                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm text-on-surface-variant mt-0.5">close</span><span class="font-body-md text-sm text-on-surface-variant">Без админ-панели</span></li>
-                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm text-on-surface-variant mt-0.5">close</span><span class="font-body-md text-sm text-on-surface-variant">Без сложной логики</span></li>
-                        </ul>
+                <div class="flex flex-col md:flex-row bg-surface-container-lowest border border-surface-variant rounded-xl overflow-hidden">
+                    <div class="md:w-2/5 p-6 flex flex-col justify-between border-b md:border-b-0 md:border-r border-surface-variant/50">
+                        <div>
+                            <span class="inline-block font-label-caps text-label-caps text-on-surface-variant border border-surface-variant px-3 py-1 rounded-full text-[11px] mb-3">MVP Lite</span>
+                            <div class="font-label-caps text-label-caps text-on-surface-variant mb-1">ТЕСТ ИДЕИ</div>
+                            <div class="font-h2 text-[32px] text-primary leading-none mb-2">от 199 990 ₸</div>
+                            <p class="font-body-md text-sm text-on-surface-variant">Минимальное приложение для проверки гипотезы и быстрого старта.</p>
+                        </div>
+                        <a class="app-wa-btn mt-6 inline-flex items-center justify-center px-5 py-3 border border-primary text-primary font-label-caps text-label-caps rounded-lg hover:bg-primary hover:text-on-primary transition-colors"
+                           href="#" target="_blank" rel="noopener"
+                           data-wa-text="Здравствуйте! Хочу выбрать тариф MONONYXX: Мобильное приложение — Тест идеи (MVP Lite) за 199 990 ₸. Хочу обсудить проект.">
+                            Выбрать
+                        </a>
                     </div>
-                    <a class="app-wa-btn mt-auto w-full inline-flex items-center justify-center px-5 py-3 border-2 border-primary text-primary font-label-caps text-label-caps rounded hover:bg-primary hover:text-on-primary transition-colors"
-                       href="#" target="_blank" rel="noopener"
-                       data-wa-text="Здравствуйте! Хочу обсудить MVP Lite для мобильного приложения (от 199 990 ₸). Можно подробнее?">
-                        Обсудить приложение
-                    </a>
+                    <div class="md:w-3/5 p-6 space-y-2">
+                        <div class="flex items-start gap-2"><span class="material-symbols-outlined text-[18px] text-green-600 mt-0.5 shrink-0">check</span><span class="font-body-md text-sm text-on-surface">2–3 экрана</span></div>
+                        <div class="flex items-start gap-2"><span class="material-symbols-outlined text-[18px] text-green-600 mt-0.5 shrink-0">check</span><span class="font-body-md text-sm text-on-surface">Простая логика</span></div>
+                        <div class="flex items-start gap-2"><span class="material-symbols-outlined text-[18px] text-green-600 mt-0.5 shrink-0">check</span><span class="font-body-md text-sm text-on-surface">Быстрый запуск от 7 дней</span></div>
+                        <div class="flex items-start gap-2"><span class="material-symbols-outlined text-[18px] text-green-600 mt-0.5 shrink-0">check</span><span class="font-body-md text-sm text-on-surface">Техническая поддержка 3 дня</span></div>
+                        <div class="flex items-start gap-2"><span class="material-symbols-outlined text-[18px] text-on-surface-variant mt-0.5 shrink-0">close</span><span class="font-body-md text-sm text-on-surface-variant">Без регистрации пользователей</span></div>
+                        <div class="flex items-start gap-2"><span class="material-symbols-outlined text-[18px] text-on-surface-variant mt-0.5 shrink-0">close</span><span class="font-body-md text-sm text-on-surface-variant">Без админ-панели</span></div>
+                        <div class="flex items-start gap-2"><span class="material-symbols-outlined text-[18px] text-on-surface-variant mt-0.5 shrink-0">close</span><span class="font-body-md text-sm text-on-surface-variant">Без сложной логики</span></div>
+                    </div>
                 </div>
 
-                <!-- MVP для бизнеса -->
-                <div class="relative flex flex-col bg-surface-container-lowest border-2 border-primary rounded-lg p-6 shadow-[4px_4px_0_0_#000] transition-all duration-300 hover:-translate-y-1 hover:shadow-[7px_7px_0_0_#000]">
-                    <div class="absolute -top-3 right-5 bg-primary text-on-primary font-label-caps text-label-caps px-3 py-1 rounded">Оптимальный выбор</div>
-                    <div class="inline-block font-label-caps text-label-caps text-primary border border-primary/30 px-3 py-1 rounded-full mb-3 self-start">Оптимальный выбор</div>
-                    <div class="font-label-caps text-label-caps text-on-surface-variant mb-2">MVP ДЛЯ БИЗНЕСА</div>
-                    <div class="font-h2 text-[30px] text-primary leading-tight mb-1">от 259&nbsp;000&nbsp;₸</div>
-                    <p class="font-body-md text-sm text-on-surface-variant mb-6">Полноценное приложение для запуска и роста бизнеса.</p>
-                    <div class="flex-grow">
-                        <div class="font-label-caps text-label-caps text-primary mb-3">Включено:</div>
-                        <ul class="space-y-2 mb-6">
-                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm text-primary mt-0.5">check</span><span class="font-body-md text-sm text-primary">5–7 экранов</span></li>
-                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm text-primary mt-0.5">check</span><span class="font-body-md text-sm text-primary">Регистрация и авторизация</span></li>
-                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm text-primary mt-0.5">check</span><span class="font-body-md text-sm text-primary">Личный кабинет пользователя</span></li>
-                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm text-primary mt-0.5">check</span><span class="font-body-md text-sm text-primary">Админ-панель / CRM</span></li>
-                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm text-primary mt-0.5">check</span><span class="font-body-md text-sm text-primary">База данных и управление контентом</span></li>
-                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm text-primary mt-0.5">check</span><span class="font-body-md text-sm text-primary">Уведомления push / in-app</span></li>
-                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm text-primary mt-0.5">check</span><span class="font-body-md text-sm text-primary">Базовая аналитика</span></li>
-                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm text-primary mt-0.5">check</span><span class="font-body-md text-sm text-primary">Демо для клиентов и инвесторов</span></li>
-                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm text-primary mt-0.5">check</span><span class="font-body-md text-sm text-primary">Техническая поддержка 7 дней</span></li>
-                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm text-primary mt-0.5">check</span><span class="font-body-md text-sm text-primary">Запуск от 14 дней</span></li>
-                        </ul>
+                <!-- MVP для бизнеса (featured) -->
+                <div class="flex flex-col md:flex-row bg-surface-container-lowest border-2 border-primary rounded-xl overflow-hidden shadow-[4px_4px_0_0_#000] relative">
+                    <div class="absolute top-0 left-0 right-0 bg-primary text-on-primary text-center font-label-caps text-label-caps py-2 text-[11px] tracking-widest">
+                        ★ ЛУЧШИЙ ВЫБОР &nbsp;·&nbsp; ЧАЩЕ ВСЕГО ВЫБИРАЮТ
                     </div>
-                    <a class="app-wa-btn mt-auto w-full inline-flex items-center justify-center px-5 py-3 bg-primary text-on-primary font-label-caps text-label-caps rounded hover:bg-tertiary-container transition-colors"
-                       href="#" target="_blank" rel="noopener"
-                       data-wa-text="Здравствуйте! Хочу обсудить MVP для бизнеса (от 259 000 ₸). Можно подробнее?">
-                        Обсудить приложение
-                    </a>
+                    <div class="md:w-2/5 p-6 pt-12 flex flex-col justify-between border-b md:border-b-0 md:border-r border-primary/20">
+                        <div>
+                            <span class="inline-block font-label-caps text-label-caps text-primary border border-primary/30 px-3 py-1 rounded-full text-[11px] mb-3">Оптимальный выбор</span>
+                            <div class="font-label-caps text-label-caps text-on-surface-variant mb-1">MVP ДЛЯ БИЗНЕСА</div>
+                            <div class="font-h2 text-[32px] text-primary leading-none mb-2">от 259 000 ₸</div>
+                            <p class="font-body-md text-sm text-on-surface-variant">Полноценное приложение для запуска и роста бизнеса.</p>
+                        </div>
+                        <a class="app-wa-btn mt-6 inline-flex items-center justify-center px-5 py-3 bg-primary text-on-primary font-label-caps text-label-caps rounded-lg hover:bg-tertiary-container transition-colors"
+                           href="#" target="_blank" rel="noopener"
+                           data-wa-text="Здравствуйте! Хочу выбрать тариф MONONYXX: Мобильное приложение — MVP для бизнеса за 259 000 ₸. Хочу обсудить проект.">
+                            Выбрать
+                        </a>
+                    </div>
+                    <div class="md:w-3/5 p-6 pt-12 space-y-2">
+                        <div class="flex items-start gap-2"><span class="material-symbols-outlined text-[18px] text-green-600 mt-0.5 shrink-0">check</span><span class="font-body-md text-sm text-on-surface">5–7 экранов</span></div>
+                        <div class="flex items-start gap-2"><span class="material-symbols-outlined text-[18px] text-green-600 mt-0.5 shrink-0">check</span><span class="font-body-md text-sm text-on-surface">Регистрация и авторизация</span></div>
+                        <div class="flex items-start gap-2"><span class="material-symbols-outlined text-[18px] text-green-600 mt-0.5 shrink-0">check</span><span class="font-body-md text-sm text-on-surface">Личный кабинет пользователя</span></div>
+                        <div class="flex items-start gap-2"><span class="material-symbols-outlined text-[18px] text-green-600 mt-0.5 shrink-0">check</span><span class="font-body-md text-sm text-on-surface">Админ-панель / CRM</span></div>
+                        <div class="flex items-start gap-2"><span class="material-symbols-outlined text-[18px] text-green-600 mt-0.5 shrink-0">check</span><span class="font-body-md text-sm text-on-surface">База данных и управление контентом</span></div>
+                        <div class="flex items-start gap-2"><span class="material-symbols-outlined text-[18px] text-green-600 mt-0.5 shrink-0">check</span><span class="font-body-md text-sm text-on-surface">Уведомления push / in-app</span></div>
+                        <div class="flex items-start gap-2"><span class="material-symbols-outlined text-[18px] text-green-600 mt-0.5 shrink-0">check</span><span class="font-body-md text-sm text-on-surface">Интеграция с сервисами</span></div>
+                        <div class="flex items-start gap-2"><span class="material-symbols-outlined text-[18px] text-green-600 mt-0.5 shrink-0">check</span><span class="font-body-md text-sm text-on-surface">Аналитика базовая</span></div>
+                        <div class="flex items-start gap-2"><span class="material-symbols-outlined text-[18px] text-green-600 mt-0.5 shrink-0">check</span><span class="font-body-md text-sm text-on-surface">Демо для клиентов и инвесторов</span></div>
+                        <div class="flex items-start gap-2"><span class="material-symbols-outlined text-[18px] text-green-600 mt-0.5 shrink-0">check</span><span class="font-body-md text-sm text-on-surface">Техническая поддержка 7 дней</span></div>
+                        <div class="flex items-start gap-2"><span class="material-symbols-outlined text-[18px] text-green-600 mt-0.5 shrink-0">check</span><span class="font-body-md text-sm text-on-surface">Запуск от 14 дней</span></div>
+                    </div>
                 </div>
 
                 <!-- MVP Pro -->
-                <div class="relative flex flex-col bg-primary text-on-primary border-2 border-primary rounded-lg p-6 shadow-[4px_4px_0_0_#cfc4c5] transition-all duration-300 hover:-translate-y-1 hover:shadow-[7px_7px_0_0_#cfc4c5]">
-                    <div class="inline-block font-label-caps text-label-caps text-on-primary/70 border border-on-primary/30 px-3 py-1 rounded-full mb-3 self-start">Для масштабирования</div>
-                    <div class="font-label-caps text-label-caps text-on-primary/70 mb-2">MVP PRO</div>
-                    <div class="font-h2 text-[30px] leading-tight mb-1">от 399&nbsp;000&nbsp;₸</div>
-                    <p class="font-body-md text-sm text-on-primary/80 mb-6">Максимум возможностей для сложных проектов и роста.</p>
-                    <div class="flex-grow">
-                        <div class="font-label-caps text-label-caps text-on-primary/70 mb-3">Включено:</div>
-                        <ul class="space-y-2 mb-6">
-                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm mt-0.5">check</span><span class="font-body-md text-sm">Всё из MVP для бизнеса</span></li>
-                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm mt-0.5">check</span><span class="font-body-md text-sm">7–10+ экранов</span></li>
-                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm mt-0.5">check</span><span class="font-body-md text-sm">Роли и права пользователей</span></li>
-                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm mt-0.5">check</span><span class="font-body-md text-sm">Платежи и подписки</span></li>
-                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm mt-0.5">check</span><span class="font-body-md text-sm">Расширенная админ-панель</span></li>
-                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm mt-0.5">check</span><span class="font-body-md text-sm">Глубокая аналитика и отчёты</span></li>
-                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm mt-0.5">check</span><span class="font-body-md text-sm">Сложные интеграции API</span></li>
-                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm mt-0.5">check</span><span class="font-body-md text-sm">Чат, real-time, геолокация и другое</span></li>
-                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm mt-0.5">check</span><span class="font-body-md text-sm">Индивидуальный дизайн</span></li>
-                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm mt-0.5">check</span><span class="font-body-md text-sm">Приоритетная поддержка 14 дней</span></li>
-                            <li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm mt-0.5">check</span><span class="font-body-md text-sm">Запуск от 21 дня</span></li>
-                        </ul>
+                <div class="flex flex-col md:flex-row bg-surface-container-lowest border border-surface-variant rounded-xl overflow-hidden">
+                    <div class="md:w-2/5 p-6 flex flex-col justify-between border-b md:border-b-0 md:border-r border-surface-variant/50">
+                        <div>
+                            <span class="inline-block font-label-caps text-label-caps text-on-surface-variant border border-surface-variant px-3 py-1 rounded-full text-[11px] mb-3">Для масштабирования</span>
+                            <div class="font-label-caps text-label-caps text-on-surface-variant mb-1">MVP PRO</div>
+                            <div class="font-h2 text-[32px] text-primary leading-none mb-2">от 399 000 ₸</div>
+                            <p class="font-body-md text-sm text-on-surface-variant">Максимум возможностей для сложных проектов и роста.</p>
+                        </div>
+                        <a class="app-wa-btn mt-6 inline-flex items-center justify-center px-5 py-3 border border-primary text-primary font-label-caps text-label-caps rounded-lg hover:bg-primary hover:text-on-primary transition-colors"
+                           href="#" target="_blank" rel="noopener"
+                           data-wa-text="Здравствуйте! Хочу выбрать тариф MONONYXX: Мобильное приложение — MVP Pro (от 399 000 ₸). Хочу обсудить проект.">
+                            Выбрать
+                        </a>
                     </div>
-                    <a class="app-wa-btn mt-auto w-full inline-flex items-center justify-center px-5 py-3 bg-on-primary text-primary font-label-caps text-label-caps rounded hover:bg-surface-container transition-colors"
-                       href="#" target="_blank" rel="noopener"
-                       data-wa-text="Здравствуйте! Хочу обсудить MVP Pro (от 399 000 ₸). Это сложный проект, нужна консультация.">
-                        Обсудить приложение
-                    </a>
-                </div>
-            </div>
-
-            <!-- Price notice -->
-            <div class="mt-8 bg-surface-container-lowest border border-surface-variant/50 rounded-lg p-6">
-                <div class="flex items-start gap-4">
-                    <span class="material-symbols-outlined text-primary text-[24px] mt-0.5 shrink-0">info</span>
-                    <div>
-                        <div class="font-label-caps text-label-caps text-primary mb-2">Важно по цене</div>
-                        <p class="font-body-md text-sm text-on-surface-variant">Стоимость мобильного приложения зависит от сложности: количества экранов, ролей пользователей, админ-панели, базы данных, оплат, интеграций, push-уведомлений и backend-логики. Простые MVP начинаются от 199 990 ₸. Сложные приложения, маркетплейсы, сервисы бронирования, доставки, CRM и продукты с несколькими ролями рассчитываются индивидуально после обсуждения задачи.</p>
+                    <div class="md:w-3/5 p-6 space-y-2">
+                        <div class="flex items-start gap-2"><span class="material-symbols-outlined text-[18px] text-green-600 mt-0.5 shrink-0">check</span><span class="font-body-md text-sm text-on-surface">Всё из MVP для бизнеса</span></div>
+                        <div class="flex items-start gap-2"><span class="material-symbols-outlined text-[18px] text-green-600 mt-0.5 shrink-0">check</span><span class="font-body-md text-sm text-on-surface">7–10+ экранов</span></div>
+                        <div class="flex items-start gap-2"><span class="material-symbols-outlined text-[18px] text-green-600 mt-0.5 shrink-0">check</span><span class="font-body-md text-sm text-on-surface">Роли и права пользователей</span></div>
+                        <div class="flex items-start gap-2"><span class="material-symbols-outlined text-[18px] text-green-600 mt-0.5 shrink-0">check</span><span class="font-body-md text-sm text-on-surface">Платежи и подписки</span></div>
+                        <div class="flex items-start gap-2"><span class="material-symbols-outlined text-[18px] text-green-600 mt-0.5 shrink-0">check</span><span class="font-body-md text-sm text-on-surface">Расширенная админ-панель</span></div>
+                        <div class="flex items-start gap-2"><span class="material-symbols-outlined text-[18px] text-green-600 mt-0.5 shrink-0">check</span><span class="font-body-md text-sm text-on-surface">Глубокая аналитика и отчёты</span></div>
+                        <div class="flex items-start gap-2"><span class="material-symbols-outlined text-[18px] text-green-600 mt-0.5 shrink-0">check</span><span class="font-body-md text-sm text-on-surface">Сложные интеграции API</span></div>
+                        <div class="flex items-start gap-2"><span class="material-symbols-outlined text-[18px] text-green-600 mt-0.5 shrink-0">check</span><span class="font-body-md text-sm text-on-surface">Чат, real-time, геолокация и др.</span></div>
+                        <div class="flex items-start gap-2"><span class="material-symbols-outlined text-[18px] text-green-600 mt-0.5 shrink-0">check</span><span class="font-body-md text-sm text-on-surface">Индивидуальный дизайн</span></div>
+                        <div class="flex items-start gap-2"><span class="material-symbols-outlined text-[18px] text-green-600 mt-0.5 shrink-0">check</span><span class="font-body-md text-sm text-on-surface">Приоритетная поддержка 14 дней</span></div>
+                        <div class="flex items-start gap-2"><span class="material-symbols-outlined text-[18px] text-green-600 mt-0.5 shrink-0">check</span><span class="font-body-md text-sm text-on-surface">Запуск от 21 дня</span></div>
                     </div>
                 </div>
             </div>
 
-            <!-- Prepayment notice -->
-            <div class="mt-4 flex items-start gap-4 border border-primary/20 bg-surface-container-lowest rounded-lg px-6 py-5">
-                <span class="material-symbols-outlined text-primary text-[24px] mt-0.5 shrink-0">payments</span>
-                <div>
-                    <div class="font-label-caps text-label-caps text-primary mb-1">50% предоплата</div>
-                    <p class="font-body-md text-sm text-on-surface-variant">Стартуем после предоплаты 50%, остаток оплачивается после готового согласованного результата.</p>
+            <!-- Price note -->
+            <p class="mt-8 font-body-md text-sm text-on-surface-variant max-w-2xl">Стоимость сложных приложений рассчитывается индивидуально после обсуждения задачи. Итоговая цена зависит от количества экранов, ролей пользователей, админ-панели, базы данных, оплат, интеграций, push-уведомлений и backend-логики.</p>
+
+            <!-- Prepayment + guarantees -->
+            <div class="mt-8 border-t border-surface-variant/50 pt-8">
+                <div class="flex flex-col md:flex-row md:items-start gap-6">
+                    <div class="flex items-start gap-3">
+                        <span class="material-symbols-outlined text-primary text-[24px] shrink-0">payments</span>
+                        <div>
+                            <div class="font-label-caps text-label-caps text-primary mb-1">50% предоплата</div>
+                            <p class="font-body-md text-sm text-on-surface-variant">Стартуем после предоплаты 50%, остаток после готового результата.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="material-symbols-outlined text-primary text-[24px] shrink-0">verified</span>
+                        <div>
+                            <div class="font-label-caps text-label-caps text-primary mb-1">Гарантия качества</div>
+                            <p class="font-body-md text-sm text-on-surface-variant">Правки до согласованного результата.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="material-symbols-outlined text-primary text-[24px] shrink-0">lock</span>
+                        <div>
+                            <div class="font-label-caps text-label-caps text-primary mb-1">Конфиденциальность данных</div>
+                            <p class="font-body-md text-sm text-on-surface-variant">NDA при необходимости.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="material-symbols-outlined text-primary text-[24px] shrink-0">schedule</span>
+                        <div>
+                            <div class="font-label-caps text-label-caps text-primary mb-1">Соблюдение сроков</div>
+                            <p class="font-body-md text-sm text-on-surface-variant">Сроки фиксируем до старта работ.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
