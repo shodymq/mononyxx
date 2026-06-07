@@ -1,17 +1,15 @@
 {
-  "rewrites": [
-    { "source": "/", "destination": "/code.html" },
-    { "source": "/cases", "destination": "/cases/index.html" },
-    { "source": "/cases/starkids", "destination": "/cases/starkids.html" },
-    { "source": "/demo/starkids", "destination": "/demo/starkids.html" },
-    { "source": "/pricing", "destination": "/pricing.html" },
-    { "source": "/quiz", "destination": "/quiz.html" },
-    { "source": "/landing-page", "destination": "/landing-page.html" },
-    { "source": "/business-website", "destination": "/business-website.html" },
-    { "source": "/mobile-app", "destination": "/mobile-app.html" },
-    { "source": "/automation", "destination": "/automation.html" }
-  ],
   "routes": [
+    { "src": "/",                   "dest": "/code.html" },
+    { "src": "/cases",              "dest": "/cases/index.html" },
+    { "src": "/cases/starkids",     "dest": "/cases/starkids.html" },
+    { "src": "/demo/starkids",      "dest": "/demo/starkids.html" },
+    { "src": "/pricing",            "dest": "/pricing.html" },
+    { "src": "/quiz",               "dest": "/quiz.html" },
+    { "src": "/landing-page",       "dest": "/landing-page.html" },
+    { "src": "/business-website",   "dest": "/business-website.html" },
+    { "src": "/mobile-app",         "dest": "/mobile-app.html" },
+    { "src": "/automation",         "dest": "/automation.html" },
     { "handle": "filesystem" },
     { "src": "/(.*)", "status": 404, "dest": "/404.html" }
   ]
