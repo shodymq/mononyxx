@@ -10,6 +10,7 @@
     { "src": "/business-website",   "dest": "/business-website.html" },
     { "src": "/mobile-app",         "dest": "/mobile-app.html" },
     { "src": "/automation",         "dest": "/automation.html" },
+    { "src": "/contacts",           "dest": "/contacts.html" },
     { "handle": "filesystem" },
     { "src": "/(.*)", "status": 404, "dest": "/404.html" }
   ]

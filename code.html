@@ -399,8 +399,8 @@ if (window.__mononyxxInitialHash) {
 <button aria-pressed="false" class="px-3 py-2 font-label-caps text-label-caps text-primary transition-colors" data-lang-control="en" type="button">EN</button>
 <button aria-pressed="true" class="px-3 py-2 font-label-caps text-label-caps text-primary transition-colors" data-lang-control="ru" type="button">RU</button>
 </div>
-<a class="inline-flex px-6 py-3 bg-primary text-on-primary font-label-caps text-label-caps rounded items-center justify-center hover:bg-tertiary-container transition-colors duration-300" href="#contact">
-                Start a Project
+<a class="inline-flex px-6 py-3 bg-primary text-on-primary font-label-caps text-label-caps rounded items-center justify-center hover:bg-tertiary-container transition-colors duration-300" href="/contacts">
+                Связаться
             </a>
 </div>
 <button aria-controls="mobile-menu" aria-expanded="false" aria-label="Open navigation menu" class="md:hidden text-primary" id="mobile-menu-button" type="button">
@@ -429,7 +429,7 @@ if (window.__mononyxxInitialHash) {
 <h1 class="font-display text-h1 md:text-display text-primary max-w-3xl mb-6 leading-tight">Сайты и приложения которые приносят клиентов</h1>
 <p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mb-10">Делаем сайты, приложения и WhatsApp-автоматизацию для бизнеса в Казахстане. Клиенты находят вас сами.</p>
 <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-<a class="px-8 py-4 bg-primary text-on-primary font-label-caps text-label-caps rounded inline-flex items-center justify-center hover:bg-tertiary-container transition-colors duration-300" id="hero-wa-btn" href="#">Начать</a>
+<a class="px-8 py-4 bg-primary text-on-primary font-label-caps text-label-caps rounded inline-flex items-center justify-center hover:bg-tertiary-container transition-colors duration-300" href="#contact">Начать</a>
 <a class="px-8 py-4 bg-transparent text-primary border border-primary/20 font-label-caps text-label-caps rounded inline-flex items-center justify-center hover:border-primary transition-colors duration-300" href="#reviews">Отзывы</a>
 </div>
 </div>
@@ -827,8 +827,8 @@ View case <span class="material-symbols-outlined text-sm">arrow_forward</span>
 <img alt="MONONYXX Logo" class="h-8 w-auto" src="mononyxx-logo.png"/>
 </div>
 <div class="flex gap-8 mb-8 md:mb-0">
-<a class="text-on-surface-variant dark:text-on-tertiary-fixed-variant font-label-caps text-label-caps hover:underline transition-all duration-300 opacity-100 hover:opacity-80" href="https://www.instagram.com/mononyxx/" rel="noopener noreferrer" target="_blank">Instagram</a>
-<a class="text-on-surface-variant dark:text-on-tertiary-fixed-variant font-label-caps text-label-caps hover:underline transition-all duration-300 opacity-100 hover:opacity-80" href="https://api.whatsapp.com/send/?phone=77089508019&amp;text&amp;type=phone_number&amp;app_absent=0&amp;utm_source=ig" rel="noopener noreferrer" target="_blank">Contact</a>
+<a class="text-on-surface-variant dark:text-on-tertiary-fixed-variant font-label-caps text-label-caps hover:underline transition-all duration-300 opacity-100 hover:opacity-80" href="https://instagram.com/mononyxx" rel="noopener noreferrer" target="_blank">@mononyxx</a>
+<a class="text-on-surface-variant dark:text-on-tertiary-fixed-variant font-label-caps text-label-caps hover:underline transition-all duration-300 opacity-100 hover:opacity-80" href="/contacts">Контакты</a>
 <a class="text-on-surface-variant dark:text-on-tertiary-fixed-variant font-label-caps text-label-caps hover:underline transition-all duration-300 opacity-100 hover:opacity-80" href="#">Privacy</a>
 <a class="text-on-surface-variant dark:text-on-tertiary-fixed-variant font-label-caps text-label-caps hover:underline transition-all duration-300 opacity-100 hover:opacity-80" href="#">Terms</a>
 </div>
@@ -1472,7 +1472,7 @@ View case <span class="material-symbols-outlined text-sm">arrow_forward</span>
 
     const WA_HERO_TEXT = 'Здравствуйте! Хочу обсудить проект для бизнеса. Интересует сайт / приложение / автоматизация.';
     const WA_BASE = 'https://api.whatsapp.com/send/?phone=77089508019&type=phone_number&app_absent=0&text=';
-    ['hero-wa-btn', 'mobile-hero-wa-btn', 'floating-wa-btn'].forEach((id) => {
+    ['mobile-hero-wa-btn', 'floating-wa-btn'].forEach((id) => {
         const el = document.getElementById(id);
         if (el) el.href = WA_BASE + encodeURIComponent(WA_HERO_TEXT);
     });
