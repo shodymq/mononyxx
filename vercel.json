@@ -10,5 +10,9 @@
     { "source": "/business-website", "destination": "/business-website.html" },
     { "source": "/mobile-app", "destination": "/mobile-app.html" },
     { "source": "/automation", "destination": "/automation.html" }
+  ],
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/(.*)", "status": 404, "dest": "/404.html" }
   ]
 }
