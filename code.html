@@ -426,8 +426,8 @@ if (window.__mononyxxInitialHash) {
 <!-- Hero Section -->
 <section class="stack-hero relative w-full px-margin-mobile md:px-margin-desktop pt-8 pb-12 md:py-20 max-w-container-max-width mx-auto flex flex-col md:flex-row items-center justify-between gap-10 overflow-hidden">
 <div class="w-full md:w-1/2 z-10 text-center md:text-left">
-<h1 class="font-display text-h1 md:text-display text-primary max-w-3xl mb-6 leading-tight">Создайте свою идею</h1>
-<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mb-10">MONONYXX создает премиальные сайты, веб-приложения, мобильные продукты и AI-автоматизацию для амбициозных брендов.</p>
+<h1 class="font-display text-h1 md:text-display text-primary max-w-3xl mb-6 leading-tight">Сайты и приложения которые приносят клиентов</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mb-10">Делаем сайты, приложения и WhatsApp-автоматизацию для бизнеса в Казахстане. Клиенты находят вас сами.</p>
 <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
 <a class="px-8 py-4 bg-primary text-on-primary font-label-caps text-label-caps rounded inline-flex items-center justify-center hover:bg-tertiary-container transition-colors duration-300" id="hero-wa-btn" href="#">Начать</a>
 <a class="px-8 py-4 bg-transparent text-primary border border-primary/20 font-label-caps text-label-caps rounded inline-flex items-center justify-center hover:border-primary transition-colors duration-300" href="#reviews">Отзывы</a>
@@ -783,10 +783,12 @@ View case <span class="material-symbols-outlined text-sm">arrow_forward</span>
 <span class="material-symbols-outlined text-2xl text-on-surface-variant transition-transform duration-300" data-select-icon>expand_more</span>
 </button>
 <div class="custom-select-menu hidden absolute left-0 right-0 top-full z-40 mt-3 bg-background border border-surface-variant/70 rounded-lg overflow-hidden" role="listbox">
-<button aria-selected="false" class="custom-select-option w-full px-4 py-4 text-left font-body-md text-sm text-primary hover:bg-surface-container transition-colors" data-value="small" role="option" type="button">$10k - $25k</button>
-<button aria-selected="false" class="custom-select-option w-full px-4 py-4 text-left font-body-md text-sm text-primary hover:bg-surface-container transition-colors" data-value="medium" role="option" type="button">$25k - $50k</button>
-<button aria-selected="false" class="custom-select-option w-full px-4 py-4 text-left font-body-md text-sm text-primary hover:bg-surface-container transition-colors" data-value="large" role="option" type="button">$50k+</button>
-<button aria-selected="false" class="custom-select-option w-full px-4 py-4 text-left font-body-md text-sm text-primary hover:bg-surface-container transition-colors" data-value="custom" role="option" type="button">Custom budget</button>
+<button aria-selected="false" class="custom-select-option w-full px-4 py-4 text-left font-body-md text-sm text-primary hover:bg-surface-container transition-colors" data-value="tier1" role="option" type="button">До 50 000 ₸</button>
+<button aria-selected="false" class="custom-select-option w-full px-4 py-4 text-left font-body-md text-sm text-primary hover:bg-surface-container transition-colors" data-value="tier2" role="option" type="button">50 000 — 100 000 ₸</button>
+<button aria-selected="false" class="custom-select-option w-full px-4 py-4 text-left font-body-md text-sm text-primary hover:bg-surface-container transition-colors" data-value="tier3" role="option" type="button">100 000 — 200 000 ₸</button>
+<button aria-selected="false" class="custom-select-option w-full px-4 py-4 text-left font-body-md text-sm text-primary hover:bg-surface-container transition-colors" data-value="tier4" role="option" type="button">200 000 — 500 000 ₸</button>
+<button aria-selected="false" class="custom-select-option w-full px-4 py-4 text-left font-body-md text-sm text-primary hover:bg-surface-container transition-colors" data-value="tier5" role="option" type="button">500 000 ₸ и выше</button>
+<button aria-selected="false" class="custom-select-option w-full px-4 py-4 text-left font-body-md text-sm text-primary hover:bg-surface-container transition-colors" data-value="unknown" role="option" type="button">Пока не знаю</button>
 </div>
 </div>
 </div>
@@ -888,8 +890,8 @@ View case <span class="material-symbols-outlined text-sm">arrow_forward</span>
         { en: 'REVIEWS', ru: 'ОТЗЫВЫ' },
         { en: 'PROCESS', ru: 'ПРОЦЕСС' },
         { en: 'Start a Project', ru: 'Начать проект' },
-        { en: 'Build your idea', ru: 'Создайте свою идею' },
-        { en: 'MONONYXX creates premium websites, web apps, mobile products, and AI automation for ambitious brands.', ru: 'MONONYXX создает премиальные сайты, веб-приложения, мобильные продукты и AI-автоматизацию для амбициозных брендов.' },
+        { en: 'Websites and apps that bring clients', ru: 'Сайты и приложения которые приносят клиентов' },
+        { en: 'We build websites, apps and WhatsApp automation for business in Kazakhstan. Clients find you themselves.', ru: 'Делаем сайты, приложения и WhatsApp-автоматизацию для бизнеса в Казахстане. Клиенты находят вас сами.' },
         { en: 'Start', ru: 'Начать' },
         { en: 'Reviews', ru: 'Отзывы' },
         { en: 'Testimonials', ru: 'Отзывы' },
@@ -1022,7 +1024,12 @@ View case <span class="material-symbols-outlined text-sm">arrow_forward</span>
         { en: 'AI Integration', ru: 'AI-интеграция' },
         { en: 'Other', ru: 'Другое' },
         { en: 'Budget Range', ru: 'Бюджет' },
-        { en: 'Custom budget', ru: 'Свой бюджет' },
+        { en: 'До 50 000 ₸', ru: 'До 50 000 ₸' },
+        { en: '50 000 — 100 000 ₸', ru: '50 000 — 100 000 ₸' },
+        { en: '100 000 — 200 000 ₸', ru: '100 000 — 200 000 ₸' },
+        { en: '200 000 — 500 000 ₸', ru: '200 000 — 500 000 ₸' },
+        { en: '500 000 ₸ и выше', ru: '500 000 ₸ и выше' },
+        { en: 'Пока не знаю', ru: 'Пока не знаю' },
         { en: 'Custom Budget', ru: 'Свой бюджет' },
         { en: 'Project Description', ru: 'Описание проекта' },
         { en: 'Briefly describe your goals and timeline...', ru: 'Кратко опишите цели и сроки...' },
