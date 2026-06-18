@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Рассчитать стоимость — MONONYXX</title>
-<meta name="description" content="Рассчитайте примерную стоимость сайта или приложения за 1 минуту. Ответьте на 5 вопросов — покажем вилку цены."/>
-<meta property="og:title" content="Рассчитать стоимость — MONONYXX | Сайты и приложения в Казахстане"/>
-<meta property="og:description" content="Ответьте на 5 вопросов — покажем примерную цену на сайт или приложение для бизнеса в Казахстане."/>
+<title>Калькулятор проекта — MONONYXX</title>
+<meta name="description" content="Ответьте на 5 вопросов за 1 минуту — подберём подходящий формат сайта или приложения и обсудим стоимость в WhatsApp."/>
+<meta property="og:title" content="Калькулятор проекта — MONONYXX | Сайты и приложения в Казахстане"/>
+<meta property="og:description" content="Ответьте на 5 вопросов — подберём подходящий формат сайта или приложения для бизнеса в Казахстане."/>
 <meta name="keywords" content="разработка сайтов Алматы, лендинг Казахстан, сайт для бизнеса КЗ, мобильное приложение Алматы, iOS Android разработка Казахстан, WhatsApp бот для бизнеса, автоматизация бизнеса Казахстан, AI интеграция КЗ, веб разработка Шымкент, создать приложение Алматы, CRM автоматизация Казахстан, лендинг под ключ КЗ"/>
 <meta property="og:image" content="/og-image.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -105,8 +105,8 @@ html, body { overflow-x: hidden; max-width: 100%; }
 
     <!-- Hero -->
     <section class="w-full px-margin-mobile md:px-margin-desktop pt-16 pb-10 max-w-container-max-width mx-auto text-center">
-        <h1 class="font-h1 text-[2.25rem] md:text-h1 text-primary mb-4">Рассчитайте стоимость</h1>
-        <p class="font-body-lg text-body-lg text-on-surface-variant">Ответьте на 5 вопросов — покажем примерную цену</p>
+        <h1 class="font-h1 text-[2.25rem] md:text-h1 text-primary mb-4">Подберите формат проекта</h1>
+        <p class="font-body-lg text-body-lg text-on-surface-variant">Ответьте на 5 вопросов — подберём подходящий формат</p>
     </section>
 
     <!-- Quiz -->
@@ -142,10 +142,10 @@ html, body { overflow-x: hidden; max-width: 100%; }
             <div class="hidden" id="quiz-result">
                 <div id="quiz-result-form">
                     <div class="text-center mb-8">
-                        <div class="font-label-caps text-label-caps text-on-surface-variant mb-3">Примерная стоимость</div>
+                        <div class="font-label-caps text-label-caps text-on-surface-variant mb-3">Рекомендуемый формат</div>
                         <div class="font-h1 text-[2rem] md:text-h1 text-primary" id="quiz-price-range"></div>
                     </div>
-                    <p class="font-body-md text-sm text-on-surface-variant mb-8 text-center">Точная цена зависит от деталей проекта. Оставьте WhatsApp — мы напишем, уточним задачу и предложим лучший вариант.</p>
+                    <p class="font-body-md text-sm text-on-surface-variant mb-8 text-center">Стоимость зависит от деталей проекта. Оставьте WhatsApp — мы напишем, уточним задачу, посчитаем смету и предложим лучший вариант.</p>
                     <div class="space-y-5">
                         <div>
                             <label class="font-label-caps text-label-caps text-on-surface-variant mb-2 block" for="quiz-name">Ваше имя</label>
@@ -284,7 +284,7 @@ html, body { overflow-x: hidden; max-width: 100%; }
         },
         {
             key: 'q5', question: 'Бюджет', type: 'radio',
-            options: ['До 50 000 ₸', '50 000 — 100 000 ₸', '100 000 — 200 000 ₸', '200 000 — 500 000 ₸', '500 000 ₸ и выше', 'Пока не знаю']
+            options: ['Минимальный — простой запуск', 'Небольшой', 'Средний', 'Крупный проект', 'Масштабный / комплексный', 'Пока не знаю']
         }
     ];
 
@@ -309,49 +309,19 @@ html, body { overflow-x: hidden; max-width: 100%; }
         return typeof step.getOptions === 'function' ? step.getOptions(quizState.answers) : step.options;
     }
 
-    function calcPrice() {
+    function recommendFormat() {
         var q1 = quizState.answers.q1 || '';
-        var q3 = quizState.answers.q3;
-        var q5 = quizState.answers.q5 || '';
-
-        var budgetMap = {
-            'До 50 000 ₸': { min: 39990, max: 49990 },
-            '50 000 — 100 000 ₸': { min: 49990, max: 99990 },
-            '100 000 — 200 000 ₸': { min: 99990, max: 199990 },
-            '200 000 — 500 000 ₸': { min: 199990, max: 499000 },
-            '500 000 ₸ и выше': { min: 499000, max: null }
+        var map = {
+            'Лендинг': 'Лендинг для заявок',
+            'Многостраничный сайт': 'Сайт для бизнеса',
+            'Мобильное приложение / MVP': 'Мобильное приложение / MVP',
+            'Автоматизация / WhatsApp-бот': 'Автоматизация / WhatsApp-бот'
         };
-
-        if (budgetMap[q5]) return budgetMap[q5];
-
-        var basePrices = {
-            'Лендинг': { min: 19990, max: 34990 },
-            'Многостраничный сайт': { min: 49990, max: 99990 },
-            'Мобильное приложение / MVP': { min: 199990, max: 399000 },
-            'Автоматизация / WhatsApp-бот': { min: 39990, max: 99990 },
-            'Не знаю, нужна консультация': { min: 19990, max: 99990 }
-        };
-        var bp = basePrices[q1] || { min: 29990, max: 99990 };
-        var mult = 1;
-        if (q3.indexOf('Админ-панель') !== -1) mult += 0.25;
-        if (q3.indexOf('База данных') !== -1) mult += 0.15;
-        if (q3.indexOf('Авторизация') !== -1) mult += 0.15;
-        if (q3.indexOf('Оплаты') !== -1) mult += 0.35;
-        if (q3.indexOf('AI/бот') !== -1) mult += 0.4;
-        return {
-            min: Math.ceil(bp.min * mult / 1000) * 1000,
-            max: bp.max ? Math.ceil(bp.max * mult / 1000) * 1000 : null
-        };
-    }
-
-    function formatPrice(p) {
-        var minStr = p.min.toLocaleString('ru-KZ') + ' ₸';
-        return p.max ? 'от ' + minStr + ' до ' + p.max.toLocaleString('ru-KZ') + ' ₸' : 'от ' + minStr;
+        return map[q1] || 'Индивидуальный проект';
     }
 
     function buildWaText(name, phone, comment) {
         var a = quizState.answers;
-        var p = calcPrice();
         var lines = ['Здравствуйте! Прошёл(а) калькулятор на сайте MONONYXX.', ''];
         if (name) lines.push('Имя: ' + name);
         if (phone) lines.push('Телефон: ' + phone);
@@ -362,7 +332,7 @@ html, body { overflow-x: hidden; max-width: 100%; }
         lines.push('Сроки: ' + (a.q4 || '—'));
         lines.push('Бюджет: ' + (a.q5 || '—'));
         lines.push('');
-        lines.push('Примерная стоимость: ' + formatPrice(p));
+        lines.push('Рекомендуемый формат: ' + recommendFormat());
         if (comment) lines.push('Комментарий: ' + comment);
         return lines.join('\n');
     }
@@ -383,7 +353,7 @@ html, body { overflow-x: hidden; max-width: 100%; }
         progressBar.style.width = pct + '%';
         stepLabel.textContent = 'Шаг ' + (step + 1) + ' из ' + TOTAL_STEPS;
         backBtn.disabled = (step === 0);
-        nextBtn.textContent = (step === TOTAL_STEPS - 1) ? 'Рассчитать' : 'Далее';
+        nextBtn.textContent = (step === TOTAL_STEPS - 1) ? 'Показать результат' : 'Далее';
         nextBtn.disabled = stepData.type === 'multi' ? false : !currentAnswer;
 
         var isMulti = stepData.type === 'multi';
@@ -427,8 +397,7 @@ html, body { overflow-x: hidden; max-width: 100%; }
         resultDiv.classList.remove('hidden');
         if (quizResultForm) quizResultForm.classList.remove('hidden');
         if (quizSuccessDiv) quizSuccessDiv.classList.add('hidden');
-        var p = calcPrice();
-        if (priceRange) priceRange.textContent = formatPrice(p);
+        if (priceRange) priceRange.textContent = recommendFormat();
     }
 
     function doRestart() {
@@ -463,7 +432,6 @@ html, body { overflow-x: hidden; max-width: 100%; }
         if (quizErrorMsg) quizErrorMsg.classList.add('hidden');
 
         var a = quizState.answers;
-        var p = calcPrice();
         var waText = buildWaText(name.trim(), phone.trim(), comment.trim());
         var waLink = buildWhatsAppLink(waText);
 
