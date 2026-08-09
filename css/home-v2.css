@@ -1568,8 +1568,21 @@ body.menu-lock .studio-header {
 }
 
 .legal-consent a {
+  position: relative;
+  display: inline-block;
   color: var(--studio-white);
-  text-underline-offset: 3px;
+  padding-bottom: 0;
+  text-decoration: none;
+}
+
+.legal-consent a::before {
+  position: absolute;
+  right: 0;
+  bottom: 1px;
+  left: 0;
+  height: 1px;
+  background: currentColor;
+  content: "";
 }
 
 .legal-consent [data-lang-copy] { display: none; }
