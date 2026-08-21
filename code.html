@@ -1735,6 +1735,20 @@ try {
 
     updateWhatsAppLinks(getCurrentLanguage());
 
+    const createMetaEventId = () => {
+        if (typeof window.crypto?.randomUUID === 'function') {
+            return window.crypto.randomUUID();
+        }
+
+        return `lead-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+    };
+
+    const getCookieValue = (name) => {
+        const prefix = `${name}=`;
+        const cookie = document.cookie.split('; ').find((item) => item.startsWith(prefix));
+        return cookie ? decodeURIComponent(cookie.slice(prefix.length)) : '';
+    };
+
     leadForm?.addEventListener('submit', async (event) => {
         event.preventDefault();
 
@@ -1787,6 +1801,11 @@ try {
         }
 
         const defaultSubmitText = translateText('Request a Project', language);
+        const eventId = createMetaEventId();
+        payload.event_id = eventId;
+        payload.event_source_url = window.location.href;
+        payload.fbp = getCookieValue('_fbp');
+        payload.fbc = getCookieValue('_fbc');
         leadSubmissionInFlight = true;
         leadSubmit.disabled = true;
         leadSubmit.textContent = translateText('Sending...', language);
@@ -1806,7 +1825,11 @@ try {
             }
 
             if (typeof fbq === 'function') {
-                fbq('track', 'Lead');
+                fbq('track', 'Lead', {
+                    content_name: 'sait_target_campaign',
+                    value: 0,
+                    currency: 'KZT',
+                }, { eventID: eventId });
             }
 
             leadForm.reset();

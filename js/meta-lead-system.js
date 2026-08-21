@@ -3,9 +3,14 @@
   const scrollTargets = document.querySelectorAll('[data-scroll-target]');
   const whatsappFloat = document.querySelector('.mls-whatsapp-float');
 
-  const trackMeta = (eventName, params = {}, custom = false) => {
+  const createMetaEventId = () => {
+    if (typeof window.crypto?.randomUUID === 'function') return window.crypto.randomUUID();
+    return `lead-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+  };
+
+  const trackMeta = (eventName, params = {}, custom = false, eventOptions) => {
     if (typeof window.fbq !== 'function') return;
-    window.fbq(custom ? 'trackCustom' : 'track', eventName, params);
+    window.fbq(custom ? 'trackCustom' : 'track', eventName, params, eventOptions);
   };
 
   trackMeta('ViewContent', {
@@ -173,11 +178,12 @@
       if (whatsappButton.classList.contains('is-opening')) return;
       event.preventDefault();
       track('mls_quiz_whatsapp_clicked');
+      const eventId = createMetaEventId();
       trackMeta('Lead', {
-        content_name: 'Meta Lead System',
+        content_name: 'whatsapp_cta',
         contact_method: 'WhatsApp',
         source: 'qualification_quiz',
-      });
+      }, false, { eventID: eventId });
       whatsappButton.classList.add('is-opening');
       window.setTimeout(() => {
         window.location.assign(whatsappButton.href);

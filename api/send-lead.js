@@ -1,3 +1,90 @@
+const { randomUUID } = require("crypto");
+
+const META_PIXEL_ID = "1580816737123369";
+const DEFAULT_META_GRAPH_VERSION = "v26.0";
+
+const firstHeaderValue = (value) => {
+  if (Array.isArray(value)) return value[0] || "";
+  return typeof value === "string" ? value : "";
+};
+
+const getClientIpAddress = (request) => {
+  const forwardedFor = firstHeaderValue(request.headers["x-forwarded-for"]);
+  if (forwardedFor) return forwardedFor.split(",")[0].trim();
+  return firstHeaderValue(request.headers["x-real-ip"]).trim();
+};
+
+const sendMetaLeadEvent = async ({
+  eventId,
+  eventSourceUrl,
+  clientIpAddress,
+  clientUserAgent,
+  fbp,
+  fbc,
+}) => {
+  const accessToken = process.env.FB_CAPI_ACCESS_TOKEN;
+  if (!accessToken) return { sent: false, reason: "not_configured" };
+
+  const graphVersion = /^v\d+\.\d+$/.test(process.env.FB_GRAPH_API_VERSION || "")
+    ? process.env.FB_GRAPH_API_VERSION
+    : DEFAULT_META_GRAPH_VERSION;
+  const userData = {
+    client_ip_address: clientIpAddress,
+    client_user_agent: clientUserAgent,
+  };
+
+  if (typeof fbp === "string" && fbp.trim()) userData.fbp = fbp.trim();
+  if (typeof fbc === "string" && fbc.trim()) userData.fbc = fbc.trim();
+
+  const payload = {
+    data: [
+      {
+        event_name: "Lead",
+        event_time: Math.floor(Date.now() / 1000),
+        event_id: eventId,
+        action_source: "website",
+        event_source_url: eventSourceUrl,
+        user_data: userData,
+        custom_data: {
+          content_name: "sait_target_campaign",
+          value: 0,
+          currency: "KZT",
+        },
+      },
+    ],
+  };
+
+  const testEventCode = process.env.FB_CAPI_TEST_EVENT_CODE;
+  if (testEventCode) payload.test_event_code = testEventCode;
+
+  try {
+    const metaResponse = await fetch(
+      `https://graph.facebook.com/${graphVersion}/${META_PIXEL_ID}/events?access_token=${encodeURIComponent(accessToken)}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      },
+    );
+    const metaResult = await metaResponse.json().catch(() => ({}));
+
+    if (!metaResponse.ok) {
+      console.error("Meta CAPI Lead failed", {
+        status: metaResponse.status,
+        message: metaResult?.error?.message || "Unknown Meta API error",
+      });
+      return { sent: false, reason: "meta_api_error" };
+    }
+
+    return { sent: true };
+  } catch (error) {
+    console.error("Meta CAPI Lead request failed", {
+      message: error instanceof Error ? error.message : "Unknown request error",
+    });
+    return { sent: false, reason: "network_error" };
+  }
+};
+
 module.exports = async function handler(request, response) {
   const allowedOrigins = new Set([
     "https://mononyxx.com",
@@ -51,6 +138,10 @@ module.exports = async function handler(request, response) {
     budget,
     description,
     privacyConsent,
+    event_id: eventId,
+    event_source_url: eventSourceUrl,
+    fbp,
+    fbc,
   } = body;
   const requiredFields = [language, name, contactMethod, contactValue, projectType, budget, description];
 
@@ -77,6 +168,21 @@ module.exports = async function handler(request, response) {
 
   if (!contactLabels[normalizedContactMethod] || !isValidContact) {
     return response.status(400).json({ error: "Invalid contact details" });
+  }
+
+  const normalizedEventId =
+    typeof eventId === "string" && /^[a-zA-Z0-9._:-]{8,128}$/.test(eventId.trim())
+      ? eventId.trim()
+      : randomUUID();
+  let normalizedEventSourceUrl = requestOrigin || "https://mononyxx.com/";
+
+  if (typeof eventSourceUrl === "string") {
+    try {
+      const parsedSourceUrl = new URL(eventSourceUrl);
+      if (allowedOrigins.has(parsedSourceUrl.origin)) normalizedEventSourceUrl = parsedSourceUrl.href;
+    } catch {
+      // Fall back to the validated request origin.
+    }
   }
 
   const escapeHtml = (value) =>
@@ -128,5 +234,14 @@ module.exports = async function handler(request, response) {
     return response.status(502).json({ error: "Failed to send Telegram message" });
   }
 
-  return response.status(200).json({ ok: true });
+  const capiResult = await sendMetaLeadEvent({
+    eventId: normalizedEventId,
+    eventSourceUrl: normalizedEventSourceUrl,
+    clientIpAddress: getClientIpAddress(request),
+    clientUserAgent: firstHeaderValue(request.headers["user-agent"]),
+    fbp,
+    fbc,
+  });
+
+  return response.status(200).json({ ok: true, capi: capiResult.sent });
 };
