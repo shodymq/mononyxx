@@ -1,4 +1,5 @@
 (() => {
+  const pixelId = '1580816737123369';
   const quiz = document.querySelector('[data-lead-quiz]');
   const scrollTargets = document.querySelectorAll('[data-scroll-target]');
   const whatsappFloat = document.querySelector('.mls-whatsapp-float');
@@ -8,9 +9,43 @@
     return `lead-${Date.now()}-${Math.random().toString(16).slice(2)}`;
   };
 
+  const pendingMetaEvents = [];
+  let metaRetryTimer = 0;
+
+  const getFbq = () => {
+    if (typeof window.fbq === 'function') return window.fbq;
+    if (typeof window._fbq === 'function') return window._fbq;
+    return null;
+  };
+
+  const sendMetaEvent = ({ eventName, params, custom, eventOptions }) => {
+    const fbq = getFbq();
+    if (!fbq) return false;
+    const command = custom ? 'trackCustom' : (eventName === 'Lead' ? 'trackSingle' : 'track');
+    if (command === 'trackSingle') fbq(command, pixelId, eventName, params, eventOptions);
+    else fbq(command, eventName, params, eventOptions);
+    return true;
+  };
+
+  const flushMetaQueue = () => {
+    const now = Date.now();
+    while (pendingMetaEvents[0] && now - pendingMetaEvents[0].queuedAt > 15000) {
+      const expired = pendingMetaEvents.shift();
+      console.warn(`[Meta Pixel] ${expired.eventName} was not sent: fbq unavailable after 15s.`);
+    }
+    while (pendingMetaEvents.length && sendMetaEvent(pendingMetaEvents[0])) pendingMetaEvents.shift();
+    if (!pendingMetaEvents.length) {
+      window.clearInterval(metaRetryTimer);
+      metaRetryTimer = 0;
+    }
+  };
+
   const trackMeta = (eventName, params = {}, custom = false, eventOptions) => {
-    if (typeof window.fbq !== 'function') return;
-    window.fbq(custom ? 'trackCustom' : 'track', eventName, params, eventOptions);
+    const event = { eventName, params, custom, eventOptions, queuedAt: Date.now() };
+    if (sendMetaEvent(event)) return true;
+    pendingMetaEvents.push(event);
+    if (!metaRetryTimer) metaRetryTimer = window.setInterval(flushMetaQueue, 200);
+    return false;
   };
 
   trackMeta('ViewContent', {
@@ -52,6 +87,7 @@
     let currentStep = 0;
     let started = false;
     let leadTracked = false;
+    let quizLeadEventId = '';
     let advanceTimer = 0;
     let isAdvancing = false;
 
@@ -130,12 +166,12 @@
         trackMeta('MLSQuizCompleted', {}, true);
         if (!leadTracked) {
           leadTracked = true;
-          const eventId = createMetaEventId();
+          quizLeadEventId = createMetaEventId();
           trackMeta('Lead', {
             content_name: 'quiz_completed',
             contact_method: 'WhatsApp',
             source: 'qualification_quiz',
-          }, false, { eventID: eventId });
+          }, false, { eventID: quizLeadEventId });
         }
         return;
       }
@@ -189,10 +225,18 @@
       if (whatsappButton.classList.contains('is-opening')) return;
       event.preventDefault();
       track('mls_quiz_whatsapp_clicked');
+      if (quizLeadEventId) {
+        trackMeta('Lead', {
+          content_name: 'quiz_completed',
+          contact_method: 'WhatsApp',
+          source: 'qualification_quiz',
+        }, false, { eventID: quizLeadEventId });
+        flushMetaQueue();
+      }
       whatsappButton.classList.add('is-opening');
       window.setTimeout(() => {
         window.location.assign(whatsappButton.href);
-      }, 220);
+      }, 500);
     });
 
     renderStep();
