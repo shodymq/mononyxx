@@ -19,11 +19,12 @@
   });
 
   whatsappFloat?.addEventListener('click', () => {
-    trackMeta('Contact', {
-      content_name: 'Meta Lead System',
+    const eventId = createMetaEventId();
+    trackMeta('Lead', {
+      content_name: 'floating_whatsapp_cta',
       contact_method: 'WhatsApp',
       source: 'floating_button',
-    });
+    }, false, { eventID: eventId });
   });
 
   scrollTargets.forEach((trigger) => {
@@ -50,6 +51,7 @@
     const customAnswerInput = quiz.elements['product-other'];
     let currentStep = 0;
     let started = false;
+    let leadTracked = false;
     let advanceTimer = 0;
     let isAdvancing = false;
 
@@ -126,6 +128,15 @@
       if (currentStep === steps.length - 1) {
         revealResult();
         trackMeta('MLSQuizCompleted', {}, true);
+        if (!leadTracked) {
+          leadTracked = true;
+          const eventId = createMetaEventId();
+          trackMeta('Lead', {
+            content_name: 'quiz_completed',
+            contact_method: 'WhatsApp',
+            source: 'qualification_quiz',
+          }, false, { eventID: eventId });
+        }
         return;
       }
 
@@ -178,12 +189,6 @@
       if (whatsappButton.classList.contains('is-opening')) return;
       event.preventDefault();
       track('mls_quiz_whatsapp_clicked');
-      const eventId = createMetaEventId();
-      trackMeta('Lead', {
-        content_name: 'whatsapp_cta',
-        contact_method: 'WhatsApp',
-        source: 'qualification_quiz',
-      }, false, { eventID: eventId });
       whatsappButton.classList.add('is-opening');
       window.setTimeout(() => {
         window.location.assign(whatsappButton.href);
