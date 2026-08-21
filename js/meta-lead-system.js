@@ -33,7 +33,6 @@
 
   if (quiz) {
     const steps = Array.from(quiz.querySelectorAll('[data-quiz-step]'));
-    const nextButton = quiz.querySelector('[data-quiz-next]');
     const backButton = quiz.querySelector('[data-quiz-back]');
     const actions = quiz.querySelector('.mls-quiz__actions');
     const result = quiz.querySelector('[data-quiz-result]');
@@ -46,6 +45,8 @@
     const customAnswerInput = quiz.elements['product-other'];
     let currentStep = 0;
     let started = false;
+    let advanceTimer = 0;
+    let isAdvancing = false;
 
     const track = (eventName, params = {}) => {
       window.dataLayer?.push({ event: eventName, ...params });
@@ -60,8 +61,6 @@
       return Boolean(value);
     };
 
-    const arrowMarkup = '<svg class="mls-arrow mls-arrow--down" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 2v12M4 10l4 4 4-4" /></svg>';
-
     const renderStep = () => {
       steps.forEach((step, index) => {
         const active = index === currentStep;
@@ -69,12 +68,10 @@
         step.setAttribute('aria-hidden', String(!active));
       });
 
-      const finalStep = currentStep === steps.length - 1;
       progress.textContent = `Шаг ${currentStep + 1} из ${steps.length}`;
       progressBar.style.width = `${((currentStep + 1) / steps.length) * 100}%`;
-      nextButton.disabled = !hasCurrentAnswer();
-      nextButton.innerHTML = `${finalStep ? 'Показать условия' : 'Продолжить'} ${arrowMarkup}`;
       backButton.hidden = currentStep === 0;
+      actions.hidden = currentStep === 0;
       customAnswer.hidden = selectedValue(steps[0]) !== 'Другое';
     };
 
@@ -114,6 +111,32 @@
       track('mls_quiz_price_viewed', { lead_owner_ready: !needsOwner });
     };
 
+    const advance = () => {
+      if (isAdvancing || !hasCurrentAnswer()) return;
+      isAdvancing = true;
+      window.clearTimeout(advanceTimer);
+      track('mls_quiz_step_completed', { step: currentStep + 1 });
+      trackMeta('MLSQuizStepCompleted', { step: currentStep + 1 }, true);
+
+      if (currentStep === steps.length - 1) {
+        revealResult();
+        trackMeta('MLSQuizCompleted', {}, true);
+        return;
+      }
+
+      currentStep += 1;
+      renderStep();
+      window.setTimeout(() => {
+        isAdvancing = false;
+        steps[currentStep].querySelector('input')?.focus({ preventScroll: true });
+      }, 180);
+    };
+
+    const scheduleAdvance = (delay = 260) => {
+      window.clearTimeout(advanceTimer);
+      advanceTimer = window.setTimeout(advance, delay);
+    };
+
     quiz.addEventListener('focusin', () => {
       if (started) return;
       started = true;
@@ -122,26 +145,26 @@
     });
 
     quiz.querySelectorAll('input[type="radio"]').forEach((input) => {
-      input.addEventListener('change', renderStep);
+      input.addEventListener('change', () => {
+        renderStep();
+        if (currentStep === 0 && input.value === 'Другое') {
+          customAnswerInput.focus({ preventScroll: true });
+          return;
+        }
+        scheduleAdvance();
+      });
     });
 
-    customAnswerInput.addEventListener('input', renderStep);
-
-    nextButton.addEventListener('click', () => {
-      if (!hasCurrentAnswer()) return;
-      track('mls_quiz_step_completed', { step: currentStep + 1 });
-      trackMeta('MLSQuizStepCompleted', { step: currentStep + 1 }, true);
-      if (currentStep === steps.length - 1) {
-        revealResult();
-        trackMeta('MLSQuizCompleted', {}, true);
-        return;
-      }
-      currentStep += 1;
+    customAnswerInput.addEventListener('input', () => {
       renderStep();
+      if (customAnswerInput.value.trim().length >= 2) scheduleAdvance(900);
+      else window.clearTimeout(advanceTimer);
     });
 
     backButton.addEventListener('click', () => {
       if (currentStep === 0) return;
+      window.clearTimeout(advanceTimer);
+      isAdvancing = false;
       currentStep -= 1;
       renderStep();
     });

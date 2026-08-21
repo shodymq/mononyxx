@@ -46,7 +46,7 @@ body.mls-page > main { overflow: clip; }
 
 /* Hero */
 .mls-hero { position: relative; min-height: max(760px, calc(100svh - 82px)); padding: clamp(70px, 9vw, 126px) 0 54px; background: var(--mls-night); color: #fff; }
-.mls-hero__image { position: absolute; inset: 0; background: #090a08 url('../assets/images/meta-lead-system-hero.png') center / cover no-repeat; opacity: .9; }
+.mls-hero__image { position: absolute; inset: 0; background-color: #090a08; background-image: url('../assets/images/meta-lead-system-hero.png'); background-image: image-set(url('../assets/images/meta-lead-system-hero.webp') type('image/webp'), url('../assets/images/meta-lead-system-hero.png') type('image/png')); background-position: center; background-size: cover; background-repeat: no-repeat; opacity: .9; }
 .mls-hero__image::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(7,8,7,.91) 0%, rgba(7,8,7,.78) 40%, rgba(7,8,7,.18) 100%); }
 .mls-hero__content { position: relative; z-index: 1; display: grid; min-height: calc(max(760px, 100svh - 82px) - clamp(124px, 9vw + 54px, 180px)); align-content: end; }
 .mls-hero .mls-label { color: rgba(255,255,255,.58); }
@@ -228,7 +228,7 @@ html.gsap-enabled .mls-animate { visibility: hidden; }
   .mls-page > main { padding-top: 72px; }
   .mls-page .seo-menu { inset: 72px 0 0; }
   .mls-hero { min-height: auto; padding: 74px 0 46px; }
-  .mls-hero__image { background-position: 66% center; opacity: .76; }
+  .mls-hero__image { background-image: url('../assets/images/meta-lead-system-hero-900.webp'); background-position: 66% center; opacity: .76; }
   .mls-hero__image::after { background: linear-gradient(90deg, rgba(7,8,7,.9), rgba(7,8,7,.75)); }
   .mls-hero__content { min-height: 0; }
   .mls-hero h1 { font-size: clamp(44px, 12.8vw, 66px); }
