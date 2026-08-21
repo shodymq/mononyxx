@@ -1,6 +1,25 @@
 (() => {
   const quiz = document.querySelector('[data-lead-quiz]');
   const scrollTargets = document.querySelectorAll('[data-scroll-target]');
+  const whatsappFloat = document.querySelector('.mls-whatsapp-float');
+
+  const trackMeta = (eventName, params = {}, custom = false) => {
+    if (typeof window.fbq !== 'function') return;
+    window.fbq(custom ? 'trackCustom' : 'track', eventName, params);
+  };
+
+  trackMeta('ViewContent', {
+    content_name: 'Meta Lead System',
+    content_category: 'Lead generation service',
+  });
+
+  whatsappFloat?.addEventListener('click', () => {
+    trackMeta('Contact', {
+      content_name: 'Meta Lead System',
+      contact_method: 'WhatsApp',
+      source: 'floating_button',
+    });
+  });
 
   scrollTargets.forEach((trigger) => {
     trigger.addEventListener('click', (event) => {
@@ -99,6 +118,7 @@
       if (started) return;
       started = true;
       track('mls_quiz_started');
+      trackMeta('MLSQuizStarted', {}, true);
     });
 
     quiz.querySelectorAll('input[type="radio"]').forEach((input) => {
@@ -110,8 +130,10 @@
     nextButton.addEventListener('click', () => {
       if (!hasCurrentAnswer()) return;
       track('mls_quiz_step_completed', { step: currentStep + 1 });
+      trackMeta('MLSQuizStepCompleted', { step: currentStep + 1 }, true);
       if (currentStep === steps.length - 1) {
         revealResult();
+        trackMeta('MLSQuizCompleted', {}, true);
         return;
       }
       currentStep += 1;
@@ -128,6 +150,11 @@
       if (whatsappButton.classList.contains('is-opening')) return;
       event.preventDefault();
       track('mls_quiz_whatsapp_clicked');
+      trackMeta('Lead', {
+        content_name: 'Meta Lead System',
+        contact_method: 'WhatsApp',
+        source: 'qualification_quiz',
+      });
       whatsappButton.classList.add('is-opening');
       window.setTimeout(() => {
         window.location.assign(whatsappButton.href);
