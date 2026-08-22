@@ -3,6 +3,14 @@
   const quiz = document.querySelector('[data-lead-quiz]');
   const scrollTargets = document.querySelectorAll('[data-scroll-target]');
   const whatsappFloat = document.querySelector('.mls-whatsapp-float');
+  const whatsappFallback = document.querySelector('[data-whatsapp-fallback]');
+  const whatsappAlternative = document.querySelector('[data-whatsapp-alternative]');
+  const copyWhatsappNumber = document.querySelector('[data-copy-whatsapp-number]');
+  const copyWhatsappStatus = document.querySelector('[data-copy-whatsapp-status]');
+  const whatsappNumber = '77089508019';
+  let whatsappFallbackTimer = 0;
+  let whatsappNavigationPending = false;
+  let whatsappClickedAt = 0;
 
   const createMetaEventId = () => {
     if (typeof window.crypto?.randomUUID === 'function') return window.crypto.randomUUID();
@@ -53,6 +61,54 @@
     content_category: 'Lead generation service',
   });
 
+  const armWhatsappFallback = () => {
+    if (!whatsappFallback) return;
+    whatsappNavigationPending = true;
+    whatsappClickedAt = Date.now();
+    whatsappFallback.hidden = true;
+    window.clearTimeout(whatsappFallbackTimer);
+    scheduleWhatsappFallback();
+  };
+
+  const scheduleWhatsappFallback = () => {
+    if (!whatsappNavigationPending || !whatsappFallback) return;
+    const delay = Math.max(0, 2800 - (Date.now() - whatsappClickedAt));
+    whatsappFallbackTimer = window.setTimeout(() => {
+      if (!whatsappNavigationPending || document.visibilityState !== 'visible') return;
+      whatsappFallback.hidden = false;
+    }, delay);
+  };
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') {
+      window.clearTimeout(whatsappFallbackTimer);
+      return;
+    }
+    scheduleWhatsappFallback();
+  });
+
+  window.addEventListener('focus', scheduleWhatsappFallback);
+  window.addEventListener('pageshow', scheduleWhatsappFallback);
+
+  copyWhatsappNumber?.addEventListener('click', async () => {
+    let copied = false;
+    try {
+      await navigator.clipboard.writeText(whatsappNumber);
+      copied = true;
+    } catch {
+      const input = document.createElement('textarea');
+      input.value = whatsappNumber;
+      input.setAttribute('readonly', '');
+      input.style.position = 'fixed';
+      input.style.opacity = '0';
+      document.body.append(input);
+      input.select();
+      copied = document.execCommand('copy');
+      input.remove();
+    }
+    copyWhatsappStatus.textContent = copied ? 'Номер скопирован: +7 708 950 80 19' : 'Номер: +7 708 950 80 19';
+  });
+
   whatsappFloat?.addEventListener('click', () => {
     const eventId = createMetaEventId();
     trackMeta('Lead', {
@@ -60,6 +116,9 @@
       contact_method: 'WhatsApp',
       source: 'floating_button',
     }, false, { eventID: eventId });
+    const floatMessage = new URL(whatsappFloat.href).searchParams.get('text') || '';
+    whatsappAlternative.href = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(floatMessage)}`;
+    armWhatsappFallback();
   });
 
   scrollTargets.forEach((trigger) => {
@@ -150,6 +209,7 @@
       ].join('\n');
 
       whatsappButton.href = `https://wa.me/77089508019?text=${encodeURIComponent(message)}`;
+      whatsappAlternative.href = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(message)}`;
       result.focus({ preventScroll: true });
       track('mls_quiz_price_viewed', { lead_owner_ready: !needsOwner });
     };
@@ -221,9 +281,7 @@
       renderStep();
     });
 
-    whatsappButton.addEventListener('click', (event) => {
-      if (whatsappButton.classList.contains('is-opening')) return;
-      event.preventDefault();
+    whatsappButton.addEventListener('click', () => {
       track('mls_quiz_whatsapp_clicked');
       if (quizLeadEventId) {
         trackMeta('Lead', {
@@ -233,10 +291,7 @@
         }, false, { eventID: quizLeadEventId });
         flushMetaQueue();
       }
-      whatsappButton.classList.add('is-opening');
-      window.setTimeout(() => {
-        window.location.assign(whatsappButton.href);
-      }, 500);
+      armWhatsappFallback();
     });
 
     renderStep();
