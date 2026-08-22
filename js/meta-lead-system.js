@@ -29,7 +29,7 @@
   const sendMetaEvent = ({ eventName, params, custom, eventOptions }) => {
     const fbq = getFbq();
     if (!fbq) return false;
-    const command = custom ? 'trackCustom' : (eventName === 'Lead' ? 'trackSingle' : 'track');
+    const command = custom ? 'trackCustom' : (eventName === 'Lead' || eventName === 'Contact' ? 'trackSingle' : 'track');
     if (command === 'trackSingle') fbq(command, pixelId, eventName, params, eventOptions);
     else fbq(command, eventName, params, eventOptions);
     return true;
@@ -111,7 +111,7 @@
 
   whatsappFloat?.addEventListener('click', () => {
     const eventId = createMetaEventId();
-    trackMeta('Lead', {
+    trackMeta('Contact', {
       content_name: 'floating_whatsapp_cta',
       contact_method: 'WhatsApp',
       source: 'floating_button',
@@ -137,6 +137,15 @@
     const actions = quiz.querySelector('.mls-quiz__actions');
     const result = quiz.querySelector('[data-quiz-result]');
     const whatsappButton = quiz.querySelector('[data-quiz-whatsapp]');
+    const contactChoice = quiz.querySelector('[data-quiz-contact-choice]');
+    const openLeadFormButton = quiz.querySelector('[data-open-lead-form]');
+    const closeLeadFormButton = quiz.querySelector('[data-close-lead-form]');
+    const leadFormPanel = quiz.querySelector('[data-quiz-lead-form]');
+    const leadNameInput = quiz.elements['lead-name'];
+    const leadPhoneInput = quiz.elements['lead-phone'];
+    const leadConsentInput = quiz.elements['lead-consent'];
+    const leadSubmitButton = quiz.querySelector('[data-submit-lead]');
+    const leadFormStatus = quiz.querySelector('[data-lead-form-status]');
     const progress = quiz.querySelector('[data-quiz-progress]');
     const progressBar = quiz.querySelector('[data-quiz-progress-bar]');
     const resultTitle = quiz.querySelector('[data-quiz-result-title]');
@@ -145,8 +154,10 @@
     const customAnswerInput = quiz.elements['product-other'];
     let currentStep = 0;
     let started = false;
-    let leadTracked = false;
     let quizLeadEventId = '';
+    let quizAnswerSummary = '';
+    let leadSubmissionInFlight = false;
+    let leadSubmitted = false;
     let advanceTimer = 0;
     let isAdvancing = false;
 
@@ -191,7 +202,8 @@
       actions.hidden = true;
       progress.parentElement.hidden = true;
       result.hidden = false;
-      whatsappButton.hidden = false;
+      contactChoice.hidden = false;
+      leadFormPanel.hidden = true;
       whatsappButton.setAttribute('aria-disabled', 'false');
 
       if (needsOwner) {
@@ -207,6 +219,8 @@
         'Понимаю условия: 149 990 ₸ в месяц, рекламный бюджет оплачивается отдельно.',
         'Хочу обсудить запуск.',
       ].join('\n');
+
+      quizAnswerSummary = answers.map(([label, value]) => `${label}: ${value}`).join('\n');
 
       whatsappButton.href = `https://wa.me/77089508019?text=${encodeURIComponent(message)}`;
       whatsappAlternative.href = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(message)}`;
@@ -224,15 +238,7 @@
       if (currentStep === steps.length - 1) {
         revealResult();
         trackMeta('MLSQuizCompleted', {}, true);
-        if (!leadTracked) {
-          leadTracked = true;
-          quizLeadEventId = createMetaEventId();
-          trackMeta('Lead', {
-            content_name: 'quiz_completed',
-            contact_method: 'WhatsApp',
-            source: 'qualification_quiz',
-          }, false, { eventID: quizLeadEventId });
-        }
+        if (!quizLeadEventId) quizLeadEventId = createMetaEventId();
         return;
       }
 
@@ -281,10 +287,113 @@
       renderStep();
     });
 
+    openLeadFormButton.addEventListener('click', () => {
+      contactChoice.hidden = true;
+      leadFormPanel.hidden = false;
+      openLeadFormButton.setAttribute('aria-expanded', 'true');
+      if (leadSubmitted) {
+        leadFormStatus.textContent = 'Заявка отправлена. Мы свяжемся с вами.';
+        leadFormStatus.dataset.state = 'success';
+      } else {
+        leadFormStatus.textContent = '';
+        leadFormStatus.removeAttribute('data-state');
+        leadNameInput.focus({ preventScroll: true });
+      }
+    });
+
+    closeLeadFormButton.addEventListener('click', () => {
+      leadFormPanel.hidden = true;
+      contactChoice.hidden = false;
+      openLeadFormButton.setAttribute('aria-expanded', 'false');
+      leadFormStatus.textContent = '';
+      leadFormStatus.removeAttribute('data-state');
+    });
+
+    const getCookieValue = (name) => {
+      const prefix = `${name}=`;
+      const cookie = document.cookie.split('; ').find((item) => item.startsWith(prefix));
+      return cookie ? decodeURIComponent(cookie.slice(prefix.length)) : '';
+    };
+
+    quiz.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (leadSubmissionInFlight || leadFormPanel.hidden) return;
+
+      const name = leadNameInput.value.trim();
+      const phone = leadPhoneInput.value.trim();
+      const phoneIsValid = /^\+?[0-9\s()-]{7,20}$/.test(phone);
+
+      if (!name || !phone || !leadConsentInput.checked) {
+        leadFormStatus.textContent = 'Заполните имя, телефон и подтвердите согласие.';
+        leadFormStatus.dataset.state = 'error';
+        return;
+      }
+
+      if (!phoneIsValid) {
+        leadFormStatus.textContent = 'Проверьте формат номера телефона.';
+        leadFormStatus.dataset.state = 'error';
+        return;
+      }
+
+      if (!quizLeadEventId) quizLeadEventId = createMetaEventId();
+      const payload = {
+        language: 'ru',
+        name,
+        contactMethod: 'whatsapp',
+        contactMethodLabel: 'Телефон или WhatsApp',
+        contactValue: phone,
+        projectType: quiz.elements.product.value === 'Другое' ? customAnswerInput.value.trim() : quiz.elements.product.value,
+        budget: '149 990 ₸ в месяц плюс рекламный бюджет',
+        description: `Заявка с лендинга Meta Lead System\n${quizAnswerSummary}`,
+        privacyConsent: true,
+        event_id: quizLeadEventId,
+        event_source_url: window.location.href,
+        fbp: getCookieValue('_fbp'),
+        fbc: getCookieValue('_fbc'),
+      };
+
+      leadSubmissionInFlight = true;
+      leadSubmitButton.disabled = true;
+      leadSubmitButton.textContent = 'Отправляем...';
+      leadFormStatus.textContent = '';
+      leadFormStatus.removeAttribute('data-state');
+
+      try {
+        const response = await fetch('/api/send-lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        if (!response.ok) throw new Error('Lead request failed');
+
+        trackMeta('Lead', {
+          content_name: 'quiz_form_submit',
+          contact_method: 'WhatsApp',
+          source: 'qualification_quiz',
+        }, false, { eventID: quizLeadEventId });
+        flushMetaQueue();
+        leadFormStatus.textContent = 'Заявка отправлена. Мы свяжемся с вами.';
+        leadFormStatus.dataset.state = 'success';
+        leadSubmitted = true;
+        leadSubmitButton.textContent = 'Заявка отправлена';
+        leadNameInput.disabled = true;
+        leadPhoneInput.disabled = true;
+        leadConsentInput.disabled = true;
+      } catch {
+        leadFormStatus.textContent = 'Не удалось отправить заявку. Попробуйте ещё раз.';
+        leadFormStatus.dataset.state = 'error';
+        leadSubmitButton.disabled = false;
+        leadSubmitButton.textContent = 'Отправить заявку';
+      } finally {
+        leadSubmissionInFlight = false;
+      }
+    });
+
     whatsappButton.addEventListener('click', () => {
       track('mls_quiz_whatsapp_clicked');
       if (quizLeadEventId) {
-        trackMeta('Lead', {
+        trackMeta('Contact', {
           content_name: 'quiz_completed',
           contact_method: 'WhatsApp',
           source: 'qualification_quiz',
