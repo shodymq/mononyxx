@@ -235,7 +235,7 @@
         '',
         ...answers.map(([label, value]) => `${label}: ${value}`),
         '',
-        'Понимаю условия: 149 990 ₸ в месяц, рекламный бюджет оплачивается отдельно.',
+        'Понимаю условия: 149 000 ₸ в месяц, рекламный бюджет оплачивается отдельно.',
         'Хочу обсудить запуск.',
       ].join('\n');
 
@@ -334,7 +334,7 @@
         contactMethodLabel: 'Телефон или WhatsApp',
         contactValue: phone,
         projectType: quiz.elements.product.value === 'Другое' ? customAnswerInput.value.trim() : quiz.elements.product.value,
-        budget: '149 990 ₸ в месяц плюс рекламный бюджет',
+        budget: '149 000 ₸ в месяц плюс рекламный бюджет',
         description: `Заявка с лендинга Meta Lead System\n${quizAnswerSummary}`,
         privacyConsent: true,
         event_id: quizLeadEventId,
