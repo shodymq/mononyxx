@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <script src="../js/meta-pixel.js?v=20260820-1"></script>
+  <script src="../js/meta-pixel.js?v=20260823-1"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Система привлечения заявок из Meta — Mononyxx</title>
@@ -19,11 +19,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="../css/seo-pages.css?v=20260809-1">
   <link rel="stylesheet" href="../css/type-system.css?v=20260801-1">
-  <link rel="stylesheet" href="../css/meta-lead-system.css?v=20260822-1">
+  <link rel="stylesheet" href="../css/meta-lead-system.css?v=20260823-1">
   <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script defer src="../js/seo-pages.js?v=20260809-1"></script>
-  <script defer src="../js/meta-lead-system.js?v=20260822-3"></script>
+  <script defer src="../js/meta-lead-system.js?v=20260823-1"></script>
 </head>
 <body class="mls-page" data-page="systems">
   <header class="site-header">
@@ -148,7 +148,7 @@
 
     <section class="mls-section" aria-labelledby="faq-title">
       <div class="mls-wrap"><div class="mls-cases__intro mls-animate"><div><p class="mls-label">07 / Вопросы</p><h2 class="mls-display" id="faq-title">Разберёмся до запуска.</h2></div><p class="mls-copy">Сначала смотрим на продукт, экономику и обработку обращений — затем решаем, есть ли смысл собирать рекламную связку.</p></div>
-        <div class="mls-faq mls-animate"><details><summary>Что будет после квиза?</summary><p>На финальном экране вы увидите стоимость и условия. Затем сможете оставить короткую заявку или перейти в WhatsApp с готовым сообщением.</p></details><details><summary>Подойдёт ли система, если рекламу ещё не запускали?</summary><p>Да, если есть понятный продукт, рекламный бюджет и возможность быстро отвечать на обращения. Начнём с оффера, лендинг-страницы и первой проверки спроса.</p></details><details><summary>Можно подключиться, если реклама уже работает?</summary><p>Да. Смотрим текущую связку: оффер, креативы, страницу, события и качество обращений. После этого понимаем, что стоит сохранить и что нужно переделать.</p></details><details><summary>Что нужно подготовить для старта?</summary><p>Расскажите о продукте, ценах, географии и целевой аудитории. Для запуска также нужны материалы, доступы к рекламному кабинету, отдельный рекламный бюджет и быстрая обратная связь.</p></details></div>
+        <div class="mls-faq mls-animate"><details><summary>Что будет после квиза?</summary><p>На финальном экране вы увидите стоимость и условия, затем сможете оставить короткую заявку. После отправки при желании можно сразу написать в WhatsApp.</p></details><details><summary>Подойдёт ли система, если рекламу ещё не запускали?</summary><p>Да, если есть понятный продукт, рекламный бюджет и возможность быстро отвечать на обращения. Начнём с оффера, лендинг-страницы и первой проверки спроса.</p></details><details><summary>Можно подключиться, если реклама уже работает?</summary><p>Да. Смотрим текущую связку: оффер, креативы, страницу, события и качество обращений. После этого понимаем, что стоит сохранить и что нужно переделать.</p></details><details><summary>Что нужно подготовить для старта?</summary><p>Расскажите о продукте, ценах, географии и целевой аудитории. Для запуска также нужны материалы, доступы к рекламному кабинету, отдельный рекламный бюджет и быстрая обратная связь.</p></details></div>
       </div>
     </section>
 
@@ -222,14 +222,6 @@
             <button class="mls-quiz__back" type="button" data-quiz-back hidden>Назад</button>
           </div>
 
-          <div class="mls-quiz__contact-choice" data-quiz-contact-choice hidden>
-            <p class="mls-label">Выберите способ связи</p>
-            <div class="mls-quiz__contact-actions">
-              <button class="mls-button mls-button--light" type="button" data-open-lead-form aria-controls="mls-quiz-lead-form" aria-expanded="false">Оставить заявку</button>
-              <a class="mls-button mls-button--whatsapp" data-quiz-whatsapp href="https://wa.me/77089508019" aria-disabled="true">Написать в WhatsApp <svg class="mls-arrow mls-arrow--external" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 13 13 3M7 3h6v6" /></svg></a>
-            </div>
-          </div>
-
           <div class="mls-quiz__lead-form" id="mls-quiz-lead-form" data-quiz-lead-form hidden>
             <p class="mls-label">Короткая заявка</p>
             <div class="mls-field">
@@ -245,10 +237,17 @@
               <span>Согласен с <a href="/privacy/">политикой конфиденциальности</a></span>
             </label>
             <div class="mls-quiz__actions">
-              <button class="mls-quiz__back" type="button" data-close-lead-form>Назад</button>
-              <button class="mls-button mls-button--light" type="submit" data-submit-lead>Отправить заявку</button>
+              <button class="mls-button mls-button--light" type="submit" data-submit-lead>Получить бесплатный разбор</button>
             </div>
             <p class="mls-form__status" data-lead-form-status role="status" aria-live="polite"></p>
+          </div>
+
+          <div class="mls-quiz__result" data-lead-success hidden tabindex="-1" aria-live="polite">
+            <p class="mls-label">Заявка получена</p>
+            <h3>Заявка получена. Мы свяжемся с вами.</h3>
+            <div class="mls-quiz__actions">
+              <a class="mls-button mls-button--whatsapp" data-quiz-whatsapp href="https://wa.me/77089508019" aria-disabled="true">Написать сразу в WhatsApp <svg class="mls-arrow mls-arrow--external" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 13 13 3M7 3h6v6" /></svg></a>
+            </div>
           </div>
 
           <div class="mls-quiz__result" data-whatsapp-fallback hidden>

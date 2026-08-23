@@ -1,6 +1,11 @@
 /* Meta Pixel — one browser-side bootstrap for all public pages. */
 (() => {
   const pixelId = '1580816737123369';
+  const productionHosts = new Set(['mononyxx.com', 'www.mononyxx.com']);
+  const metaPixelEnabled = productionHosts.has(window.location.hostname.toLowerCase());
+
+  window.__mononyxxMetaPixelEnabled = metaPixelEnabled;
+  if (!metaPixelEnabled) return;
 
   if (window.__mononyxxMetaPixelInitialized) return;
   window.__mononyxxMetaPixelInitialized = true;

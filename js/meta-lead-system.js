@@ -1,4 +1,7 @@
 (() => {
+  if (window.__mononyxxMetaLeadSystemInitialized) return;
+  window.__mononyxxMetaLeadSystemInitialized = true;
+
   const pixelId = '1580816737123369';
   const quiz = document.querySelector('[data-lead-quiz]');
   const scrollTargets = document.querySelectorAll('[data-scroll-target]');
@@ -27,6 +30,7 @@
   };
 
   const sendMetaEvent = ({ eventName, params, custom, eventOptions }) => {
+    if (window.__mononyxxMetaPixelEnabled !== true) return false;
     const fbq = getFbq();
     if (!fbq) return false;
     const command = custom ? 'trackCustom' : (eventName === 'Lead' || eventName === 'Contact' ? 'trackSingle' : 'track');
@@ -36,6 +40,12 @@
   };
 
   const flushMetaQueue = () => {
+    if (window.__mononyxxMetaPixelEnabled !== true) {
+      pendingMetaEvents.length = 0;
+      window.clearInterval(metaRetryTimer);
+      metaRetryTimer = 0;
+      return;
+    }
     const now = Date.now();
     while (pendingMetaEvents[0] && now - pendingMetaEvents[0].queuedAt > 15000) {
       const expired = pendingMetaEvents.shift();
@@ -49,6 +59,7 @@
   };
 
   const trackMeta = (eventName, params = {}, custom = false, eventOptions) => {
+    if (window.__mononyxxMetaPixelEnabled !== true) return false;
     const event = { eventName, params, custom, eventOptions, queuedAt: Date.now() };
     if (sendMetaEvent(event)) return true;
     pendingMetaEvents.push(event);
@@ -121,6 +132,16 @@
     armWhatsappFallback();
   });
 
+  whatsappAlternative?.addEventListener('click', () => {
+    const eventId = createMetaEventId();
+    trackMeta('Contact', {
+      content_name: 'whatsapp_fallback',
+      contact_method: 'WhatsApp',
+      source: 'fallback_link',
+    }, false, { eventID: eventId });
+    armWhatsappFallback();
+  });
+
   scrollTargets.forEach((trigger) => {
     trigger.addEventListener('click', (event) => {
       const target = document.querySelector(trigger.getAttribute('data-scroll-target'));
@@ -137,10 +158,8 @@
     const actions = quiz.querySelector('.mls-quiz__actions');
     const result = quiz.querySelector('[data-quiz-result]');
     const whatsappButton = quiz.querySelector('[data-quiz-whatsapp]');
-    const contactChoice = quiz.querySelector('[data-quiz-contact-choice]');
-    const openLeadFormButton = quiz.querySelector('[data-open-lead-form]');
-    const closeLeadFormButton = quiz.querySelector('[data-close-lead-form]');
     const leadFormPanel = quiz.querySelector('[data-quiz-lead-form]');
+    const leadSuccessPanel = quiz.querySelector('[data-lead-success]');
     const leadNameInput = quiz.elements['lead-name'];
     const leadPhoneInput = quiz.elements['lead-phone'];
     const leadConsentInput = quiz.elements['lead-consent'];
@@ -202,9 +221,9 @@
       actions.hidden = true;
       progress.parentElement.hidden = true;
       result.hidden = false;
-      contactChoice.hidden = false;
-      leadFormPanel.hidden = true;
-      whatsappButton.setAttribute('aria-disabled', 'false');
+      leadFormPanel.hidden = false;
+      leadSuccessPanel.hidden = true;
+      whatsappButton.setAttribute('aria-disabled', 'true');
 
       if (needsOwner) {
         resultTitle.textContent = 'Сначала назначьте ответственного за обращения.';
@@ -225,6 +244,7 @@
       whatsappButton.href = `https://wa.me/77089508019?text=${encodeURIComponent(message)}`;
       whatsappAlternative.href = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(message)}`;
       result.focus({ preventScroll: true });
+      window.setTimeout(() => leadNameInput.focus({ preventScroll: true }), 0);
       track('mls_quiz_price_viewed', { lead_owner_ready: !needsOwner });
     };
 
@@ -238,7 +258,6 @@
       if (currentStep === steps.length - 1) {
         revealResult();
         trackMeta('MLSQuizCompleted', {}, true);
-        if (!quizLeadEventId) quizLeadEventId = createMetaEventId();
         return;
       }
 
@@ -287,37 +306,9 @@
       renderStep();
     });
 
-    openLeadFormButton.addEventListener('click', () => {
-      contactChoice.hidden = true;
-      leadFormPanel.hidden = false;
-      openLeadFormButton.setAttribute('aria-expanded', 'true');
-      if (leadSubmitted) {
-        leadFormStatus.textContent = 'Заявка отправлена. Мы свяжемся с вами.';
-        leadFormStatus.dataset.state = 'success';
-      } else {
-        leadFormStatus.textContent = '';
-        leadFormStatus.removeAttribute('data-state');
-        leadNameInput.focus({ preventScroll: true });
-      }
-    });
-
-    closeLeadFormButton.addEventListener('click', () => {
-      leadFormPanel.hidden = true;
-      contactChoice.hidden = false;
-      openLeadFormButton.setAttribute('aria-expanded', 'false');
-      leadFormStatus.textContent = '';
-      leadFormStatus.removeAttribute('data-state');
-    });
-
-    const getCookieValue = (name) => {
-      const prefix = `${name}=`;
-      const cookie = document.cookie.split('; ').find((item) => item.startsWith(prefix));
-      return cookie ? decodeURIComponent(cookie.slice(prefix.length)) : '';
-    };
-
     quiz.addEventListener('submit', async (event) => {
       event.preventDefault();
-      if (leadSubmissionInFlight || leadFormPanel.hidden) return;
+      if (leadSubmitted || leadSubmissionInFlight || leadFormPanel.hidden) return;
 
       const name = leadNameInput.value.trim();
       const phone = leadPhoneInput.value.trim();
@@ -347,9 +338,6 @@
         description: `Заявка с лендинга Meta Lead System\n${quizAnswerSummary}`,
         privacyConsent: true,
         event_id: quizLeadEventId,
-        event_source_url: window.location.href,
-        fbp: getCookieValue('_fbp'),
-        fbc: getCookieValue('_fbc'),
       };
 
       leadSubmissionInFlight = true;
@@ -369,37 +357,38 @@
 
         trackMeta('Lead', {
           content_name: 'quiz_form_submit',
-          contact_method: 'WhatsApp',
+          contact_method: 'Phone',
           source: 'qualification_quiz',
         }, false, { eventID: quizLeadEventId });
         flushMetaQueue();
-        leadFormStatus.textContent = 'Заявка отправлена. Мы свяжемся с вами.';
-        leadFormStatus.dataset.state = 'success';
         leadSubmitted = true;
-        leadSubmitButton.textContent = 'Заявка отправлена';
-        leadNameInput.disabled = true;
-        leadPhoneInput.disabled = true;
-        leadConsentInput.disabled = true;
+        leadFormPanel.hidden = true;
+        leadSuccessPanel.hidden = false;
+        whatsappButton.setAttribute('aria-disabled', 'false');
+        leadSuccessPanel.focus({ preventScroll: true });
       } catch {
         leadFormStatus.textContent = 'Не удалось отправить заявку. Попробуйте ещё раз.';
         leadFormStatus.dataset.state = 'error';
         leadSubmitButton.disabled = false;
-        leadSubmitButton.textContent = 'Отправить заявку';
+        leadSubmitButton.textContent = 'Получить бесплатный разбор';
       } finally {
         leadSubmissionInFlight = false;
       }
     });
 
-    whatsappButton.addEventListener('click', () => {
-      track('mls_quiz_whatsapp_clicked');
-      if (quizLeadEventId) {
-        trackMeta('Contact', {
-          content_name: 'quiz_completed',
-          contact_method: 'WhatsApp',
-          source: 'qualification_quiz',
-        }, false, { eventID: quizLeadEventId });
-        flushMetaQueue();
+    whatsappButton.addEventListener('click', (event) => {
+      if (!leadSubmitted) {
+        event.preventDefault();
+        return;
       }
+      track('mls_quiz_whatsapp_clicked');
+      const eventId = createMetaEventId();
+      trackMeta('Contact', {
+        content_name: 'quiz_completed',
+        contact_method: 'WhatsApp',
+        source: 'qualification_quiz',
+      }, false, { eventID: eventId });
+      flushMetaQueue();
       armWhatsappFallback();
     });
 
