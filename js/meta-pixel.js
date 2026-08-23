@@ -30,4 +30,17 @@
 
   window.fbq('init', pixelId);
   window.fbq('track', 'PageView');
+
+  document.addEventListener('click', (event) => {
+    const whatsappLink = event.target?.closest?.('a[href*="wa.me/"], a[href*="api.whatsapp.com/send"]');
+    if (!whatsappLink || whatsappLink.dataset.metaContactHandled === 'true') return;
+    const eventId = typeof window.crypto?.randomUUID === 'function'
+      ? window.crypto.randomUUID()
+      : `contact-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+    window.fbq('trackSingle', pixelId, 'Contact', {
+      content_name: whatsappLink.dataset.metaContentName || 'whatsapp_cta',
+      contact_method: 'WhatsApp',
+      source: whatsappLink.dataset.metaSource || document.body?.dataset.page || 'site_link',
+    }, { eventID: eventId });
+  });
 })();
