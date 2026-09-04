@@ -1,12 +1,18 @@
 {
+  "trailingSlash": true,
   "redirects": [
-    { "source": "/razrabotka-prilozheniy", "destination": "/meta-lead-system/", "permanent": true },
+    { "source": "/code.html", "destination": "/", "permanent": true },
+    { "source": "/razrabotka-prilozheniy.html", "destination": "/razrabotka-prilozheniy/", "permanent": true },
     { "source": "/pricing", "destination": "/tseny/", "permanent": true },
     { "source": "/pricing.html", "destination": "/tseny/", "permanent": true },
     { "source": "/cases", "destination": "/portfolio/", "permanent": true },
+    { "source": "/cases/starkids", "destination": "/cases/starkids/", "permanent": true },
+    { "source": "/cases/starkids.html", "destination": "/cases/starkids/", "permanent": true },
     { "source": "/contacts", "destination": "/kontakty/", "permanent": true },
     { "source": "/quiz", "destination": "/kontakty/", "permanent": true },
-    { "source": "/quiz.html", "destination": "/kontakty/", "permanent": true }
+    { "source": "/quiz.html", "destination": "/kontakty/", "permanent": true },
+    { "source": "/demo/starkids", "destination": "/demo/starkids/", "permanent": true },
+    { "source": "/demo/starkids.html", "destination": "/demo/starkids/", "permanent": true }
   ],
   "rewrites": [
     { "source": "/", "destination": "/code.html" },
@@ -18,7 +24,7 @@
     { "source": "/podderzhka", "destination": "/podderzhka/index.html" },
     { "source": "/privacy", "destination": "/privacy/index.html" },
     { "source": "/terms", "destination": "/terms/index.html" },
-    { "source": "/cases/starkids", "destination": "/cases/starkids.html" },
-    { "source": "/demo/starkids", "destination": "/demo/starkids.html" }
+    { "source": "/cases/starkids/", "destination": "/cases/starkids.html" },
+    { "source": "/demo/starkids/", "destination": "/demo/starkids.html" }
   ]
 }

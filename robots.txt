@@ -2,5 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin/
 Disallow: /private/
-Sitemap: https://mononyxx.com/sitemap.xml
-Host: mononyxx.com
+Sitemap: https://www.mononyxx.com/sitemap.xml
