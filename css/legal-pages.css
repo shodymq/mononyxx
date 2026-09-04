@@ -28,7 +28,8 @@ html:lang(en) .legal-hero__copy[data-lang-copy="en"] { display: grid; }
 
 .legal-hero__content { min-width: 0; }
 
-.legal-hero h1 {
+.legal-hero h1,
+.legal-hero h2 {
   max-width: 1050px;
   margin: 0;
   font-size: clamp(54px, 6.6vw, 92px);
@@ -193,7 +194,8 @@ html:lang(en) .legal-footer .wrap[data-lang-copy="en"] { display: flex; }
     gap: 28px;
   }
 
-  .legal-hero h1 {
+  .legal-hero h1,
+  .legal-hero h2 {
     max-inline-size: 100%;
     font-size: clamp(38px, 9vw, 46px);
     line-height: .94;
